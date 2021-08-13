@@ -1,0 +1,46 @@
+<template>
+  <div class="swiper-container" :style="{ width: width, height: height }">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <slot></slot>
+    </div>
+    <!-- If we need pagination -->
+    <div v-if="pagination" class="swiper-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <div :class="['swiper-button-prev',{'text-success':!danger,'text-danger':danger}]"></div>
+    <div :class="['swiper-button-next',{'text-success':!danger,'text-danger':danger}]"></div>
+  </div>
+</template>
+
+<script>
+import Swiper, { Autoplay, EffectFade, Pagination, Navigation } from "swiper";
+Swiper.use([Autoplay, EffectFade, Pagination, Navigation]);
+export default {
+  props: {"width":String,"height":String,"danger":Boolean,"pagination":Boolean},
+  mounted() {
+    new Swiper(".swiper-container", {
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        dynamicBullets: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      effect: "fade",
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      }
+    });
+  },
+};
+</script>
+<style scoped>
+.swiper-container{
+    border-radius: 20px;
+}
+</style>

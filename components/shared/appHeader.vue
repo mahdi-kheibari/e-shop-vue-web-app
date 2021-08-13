@@ -1,6 +1,6 @@
 <template>
   <header>
-    <b-navbar toggleable="md" type="light" variant="light" class="py-0">
+    <b-navbar toggleable="md" type="light" variant="white" class="py-0">
       <b-navbar-brand href="#" class="ms-4">
         <div class="d-flex justify-content-center">
           <NuxtLogo />
@@ -35,10 +35,22 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
+    <div>
+      <b-nav tabs class="bg-white">
+        <b-nav-item active>Home</b-nav-item>
+        <b-nav-item>All Product</b-nav-item>
+        <b-nav-item>About Us</b-nav-item>
+        <b-nav-item></b-nav-item>
+      </b-nav>
+    </div>
   </header>
 </template>
 <style scoped>
 .nuxt-logo {
   height: 25px !important;
+}
+.nav-link.active{
+    background-color: #f8f9fa !important;
+    border-bottom-color: #f8f9fa !important;
 }
 </style>

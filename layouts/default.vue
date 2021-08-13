@@ -1,6 +1,7 @@
 <template>
   <div>
     <appHeader />
+    <br>
     <nuxt />
     <appFooter />
   </div>
@@ -15,3 +16,8 @@ export default {
   },
 };
 </script>
+<style>
+body{
+ background: rgb(248, 249, 250) !important;
+}
+</style>

@@ -37,10 +37,15 @@
     </b-navbar>
     <div>
       <b-nav tabs class="bg-white">
-        <b-nav-item active>Home</b-nav-item>
-        <b-nav-item>All Product</b-nav-item>
-        <b-nav-item>About Us</b-nav-item>
-        <b-nav-item></b-nav-item>
+        <b-nav-item to="/" exact exact-active-class="active">
+            Home
+        </b-nav-item>
+        <b-nav-item to="/Products" exact exact-active-class="active">
+            All Product
+        </b-nav-item>
+        <b-nav-item to="/about" exact exact-active-class="active">
+            About Us
+        </b-nav-item>
       </b-nav>
     </div>
   </header>

@@ -52,9 +52,14 @@
         </div>
       </section>
       <section class="bestsellers bg-white my-5">
-        <h3 class="font-weight-bold bestsellers-title d-inline m-3 ms-2">
-          Recent bestsellers
-        </h3>
+        <div class="d-flex justify-content-between align-items-baseline">
+            <h3 class="font-weight-bold bestsellers-title d-inline m-2">
+            Recent bestsellers
+            </h3>
+            <nuxt-link to="" class="btn btn-outline-success me-1">
+                See all
+            </nuxt-link>    
+        </div>
         <secondSwiper width="100%" height="225px">
           <div
             v-for="i in bestsellersSlider"
@@ -74,9 +79,14 @@
       <section
         class="brands bg-white mb-5"
       >
-        <h3 class="font-weight-bold brands-title d-inline m-3 ms-2">
-          Special brands
-        </h3>
+        <div class="d-flex justify-content-between align-items-baseline">
+            <h3 class="font-weight-bold brands-title d-inline m-2">
+                Special brands
+            </h3>
+            <nuxt-link to="" class="btn btn-outline-success me-1">
+                See all
+            </nuxt-link>    
+        </div>
         <secondSwiper width="100%" height="210px" class="Brands">
           <div
             v-for="i in SpecialBrandsSlider"
@@ -137,7 +147,7 @@ export default {
   }
 }
 .bestsellers {
-  height: 270px;
+  height: 285px;
   &-name {
     white-space: nowrap;
     overflow: hidden;
@@ -145,6 +155,6 @@ export default {
   }
 }
 .brands{
-    height: 250px;
+    height: 265px;
 }
 </style>

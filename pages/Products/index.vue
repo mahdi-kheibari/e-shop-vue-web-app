@@ -5,7 +5,7 @@
             <div class="row">
                 <div v-for="(i,key) in allCategories" :key="key" class="col-12 col-md-6">
                     <div class="category my-2">
-                        <nuxt-link to="" :style="{'background-image':'url('+i.address+')'}"></nuxt-link>
+                        <nuxt-link :to="i.route" :style="{'background-image':'url('+i.address+')'}"></nuxt-link>
                     </div>
                 </div>
             </div>

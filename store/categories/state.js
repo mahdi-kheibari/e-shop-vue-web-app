@@ -2,26 +2,74 @@ export default () => ({
     allCategories:{
         "Digital products":
             {
-                address:"/images/category/Digital_products.jpg",
-                route:"/Products/category/Digital"
+                address:"/images/category/Digital/cover.jpg",
+                route:"/Products/category/Digital",
+                products:{
+                    mobile:{
+                        cover:"/images/category/Digital/mobile/cover.png",
+                        route:"/Products/Digital/mobile",
+                        product:""
+                    },
+                    laptop:{
+                        cover:"/images/category/Digital/laptop/cover.png",
+                        route:"/Products/Digital/laptop",
+                        product:""
+                    }
+                }
             }
         ,
         "Fashion and clothing":
             {
-                address:"/images/category/Fashion_and_clothing.jpg",
-                route:"/Products/category/Fashion"
+                address:"/images/category/Fashion/cover.jpg",
+                route:"/Products/category/Fashion",
+                products:{
+                    female:{
+                        cover:"/images/category/Fashion/female/cover.png",
+                        route:"/Products/Fashion/female",
+                        product:""
+                    },
+                    male:{
+                        cover:"/images/category/Fashion/male/cover.png",
+                        route:"/Products/Fashion/male",
+                        product:""
+                    }
+                }
             }
         ,
         "House":
             {
-                address:"/images/category/House.jpg",
-                route:"/Products/category/House"
+                address:"/images/category/House/cover.jpg",
+                route:"/Products/category/House",
+                products:{
+                    cleaning:{
+                        cover:"/images/category/House/cleaning/cover.png",
+                        route:"/Products/House/cleaning",
+                        product:""
+                    },
+                    "video-audio":{
+                        cover:"/images/category/House/video_and_audio/cover.png",
+                        route:"/Products/House/video-audio",
+                        product:""
+                    }
+                }
             }
         ,
         "Beauty and health":
             {
-                address:"/images/category/Beauty_and_health.jpg",
-                route:"/Products/category/Beauty"
+                address:"/images/category/Beauty/cover.jpg",
+                route:"/Products/category/Beauty",
+                products:{
+                    health:{
+                        cover:"/images/category/Beauty/Health/cover.png",
+                        route:"/Products/Beauty/health",
+                        product:""
+                    },
+                    makeup:{
+                        cover:"/images/category/Beauty/makeup/cover.png",
+                        route:"/Products/Beauty/makeup",
+                        product:""
+                    }
+                }
             }
         
     }

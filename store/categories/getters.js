@@ -1,5 +1,5 @@
 export default {
-    category(state){
+    allCategories(state){
         return state.allCategories;
     }
 }

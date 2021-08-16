@@ -23,7 +23,7 @@ export default {
   css: [
       '@/assets/css/swiper.css',
       '@/node_modules/swiper/swiper-bundle.css',
-      '@/assets/css/header.css'
+      '@/assets/css/aside.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

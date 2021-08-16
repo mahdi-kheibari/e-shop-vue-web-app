@@ -1,14 +1,11 @@
 <template>
-  <div class="container-fluid">
+    <div class="container-fluid">
     <div class="row">
       <div class="col-2">
         <asideLayout>
             <div slot="beforeDivider">
-                <collapseItem name="Products" :visible=true id="collapse-1" :items="allCategories" />
-            </div>
-            <div slot="afterDivider">
-                <item name="Special discount" route="/" />
-                <item name="Recent bestsellers" route="/" />
+                <item name="Digital products" :route="digitalCategories.route" />
+                <collapseItem name="Products" :visible=true id="collapse-2" :items="digitalCategories.products" />
             </div>
         </asideLayout>
       </div>
@@ -23,8 +20,8 @@ import collapseItem from '@/components/aside/collapseItem.vue';
 import item from '@/components/aside/item.vue';
 export default {
   computed: {
-    allCategories() {
-      return this.$store.state.categories.allCategories;
+    digitalCategories() {
+      return this.$store.state.categories.allCategories['Digital products'];
     },
   },
   components:{

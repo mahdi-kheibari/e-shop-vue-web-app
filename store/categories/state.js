@@ -8,12 +8,10 @@ export default () => ({
                     mobile:{
                         cover:"/images/category/Digital/mobile/cover.png",
                         route:"/Products/Digital/mobile",
-                        product:""
                     },
                     laptop:{
                         cover:"/images/category/Digital/laptop/cover.png",
                         route:"/Products/Digital/laptop",
-                        product:""
                     }
                 }
             }
@@ -26,12 +24,10 @@ export default () => ({
                     female:{
                         cover:"/images/category/Fashion/female/cover.png",
                         route:"/Products/Fashion/female",
-                        product:""
                     },
                     male:{
                         cover:"/images/category/Fashion/male/cover.png",
                         route:"/Products/Fashion/male",
-                        product:""
                     }
                 }
             }
@@ -44,12 +40,10 @@ export default () => ({
                     cleaning:{
                         cover:"/images/category/House/cleaning/cover.png",
                         route:"/Products/House/cleaning",
-                        product:""
                     },
                     "video-audio":{
                         cover:"/images/category/House/video_and_audio/cover.png",
                         route:"/Products/House/video-audio",
-                        product:""
                     }
                 }
             }
@@ -62,12 +56,10 @@ export default () => ({
                     health:{
                         cover:"/images/category/Beauty/Health/cover.png",
                         route:"/Products/Beauty/health",
-                        product:""
                     },
                     makeup:{
                         cover:"/images/category/Beauty/makeup/cover.png",
                         route:"/Products/Beauty/makeup",
-                        product:""
                     }
                 }
             }

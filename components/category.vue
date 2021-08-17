@@ -23,7 +23,7 @@ export default {
     border-radius: 8px;
     border: 1px solid #ededed;
     padding: 16px 24px 24px;
-    margin-bottom: 24px;
+    margin-bottom: 15px;
     box-shadow: 0 1px 4px 0 rgb(0 0 0 / 3%);
     a{
         text-decoration: none;

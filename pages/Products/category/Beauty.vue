@@ -27,11 +27,11 @@ export default {
     asyncData({store}) {
         const products=[];
         const beautyProducts=store.state.Beauty.Products;
-        for ( let key in beautyProducts) {
-            products.push(...beautyProducts[key]);
-        }
+        // for ( let key in beautyProducts) {
+        //     products.push(...beautyProducts[key]);
+        // }
         return {
-            Products:products
+            Products:beautyProducts
         }
     },
 }

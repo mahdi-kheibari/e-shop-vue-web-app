@@ -3,7 +3,12 @@ export const state = () => ({
         health:[
             {
                 name:"DERMALIFT SEBOLIFT CLEANSING SYNDET FOAM 150 mil",
-                img:"/images/category/Beauty/health/FOAM_150.jpg",
+                id:"FOAM_150",
+                images:[
+                    {
+                        address:"/images/category/Beauty/health/FOAM_150.jpg",
+                    }
+                ],
                 price:"51,800",
                 special:false,
                 discount:"",
@@ -12,7 +17,12 @@ export const state = () => ({
             },
             {
                 name:"Eucerin Nobacter Soap 100g",
-                img:"/images/category/Beauty/health/Soap_100g.jpg",
+                id:"Soap_100g",
+                images:[
+                    {
+                        address:"/images/category/Beauty/health/Soap_100g.jpg",
+                    }
+                ],
                 price:"50,100",
                 special:false,
                 discount:"",
@@ -21,7 +31,12 @@ export const state = () => ({
             },
             {
                 name:"Pro Derma Acnevest Pain 100 gr",
-                img:"/images/category/Beauty/health/Pain_100gr.jpg",
+                id:"Pain_100gr",
+                images:[
+                    {
+                        address:"/images/category/Beauty/health/Pain_100gr.jpg",
+                    }
+                ],
                 price:"55,300",
                 special:true,
                 discount:"17%",
@@ -32,7 +47,12 @@ export const state = () => ({
         makeup:[
             {
                 name:"Essence I Love Extreme Volume Mascara",
-                img:"/images/category/Beauty/makeup/Essence.jpg",
+                id:"Essence",
+                images:[
+                    {
+                        address:"/images/category/Beauty/makeup/Essence.jpg",
+                    }
+                ],
                 price:"79,000",
                 special:false,
                 discount:"",
@@ -41,7 +61,12 @@ export const state = () => ({
             },
             {
                 name:"Callista Cover Up Concealer C11",
-                img:"/images/category/Beauty/makeup/Callista.jpg",
+                id:"Callista",
+                images:[
+                    {
+                        address:"/images/category/Beauty/makeup/Callista.jpg",
+                    }
+                ],
                 price:"46,100",
                 special:true,
                 discount:"20%",
@@ -50,7 +75,12 @@ export const state = () => ({
             },
             {
                 name:"Callista Extend Volume Mascara",
-                img:"/images/category/Beauty/makeup/Callista_Extend.jpg",
+                id:"Callista_Extend",
+                images:[
+                    {
+                        address:"/images/category/Beauty/makeup/Callista_Extend.jpg",
+                    }
+                ],
                 price:"70,000",
                 special:true,
                 discount:"31%",

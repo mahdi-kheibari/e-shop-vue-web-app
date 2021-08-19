@@ -1,42 +1,75 @@
 <template>
-      <div class="products-list bg-white mb-3">
-        <ul class="d-flex flex-wrap align-content-between mt-1 list-unstyled m-0">
-          <li v-for="item in items" :key="item.name" class="products-list_item">
-            <div
-              class="position-relative d-flex flex-column justify-content-between"
-            >
-              <div v-if="item.special" class="products-list_item_special text-danger text-center mx-2">
-                    special sale
-              </div>
-              <div v-else class="no-special"></div>
-              <nuxt-link to="" class="products-list_item_img">
-                
-                <img :src="item.img" :alt="item.name">    
-              </nuxt-link>
-              <div class="d-flex flex-column mx-3">
-                  <div class="products-list_item_title text-center mb-2">
-                      <nuxt-link to="" class="link-dark">
-                          {{item.name}}
-                      </nuxt-link>
-                  </div>
-                  <div :class="['products-list_item_price','d-flex','flex-column','font-weight-bold',{'justify-content-end':!item.special}]">
-                      <div v-if="item.special">
-                          <span class="badge rounded-pill bg-danger">{{item.discount}}</span>
-                          <span class="text-secondary text-decoration-line-through">
-                              {{item.realPrice}}
-                          </span>
-                      </div>
-                      <div>{{'تومان'+item.price}}</div>
-                  </div>
-              </div>
+       <div class="products-list bg-white mb-3">
+        <div v-if="Array.isArray(items)===false" class="d-flex flex-wrap">
+            <div v-for="(item,key) in items" :key="key" class="d-flex flex-wrap mt-1 m-0">
+                <div v-for="i in item" :key="i.name" class="products-list_item">
+                    <div
+                    class="position-relative d-flex flex-column justify-content-between"
+                    >
+                        <div v-if="i.special" class="products-list_item_special text-danger text-center mx-2">
+                                special sale
+                        </div>
+                        <div v-else class="no-special"></div>
+                        <nuxt-link :to="'/Product/'+key+'/'+i.id" class="products-list_item_img">
+                            <img :src="i.images[0].address" :alt="i.name">    
+                        </nuxt-link>
+                        <div class="d-flex flex-column mx-3">
+                            <div class="products-list_item_title text-center mb-2">
+                                <nuxt-link :to="'/Product/'+key+'/'+i.id" class="link-dark">
+                                    {{i.name}}
+                                </nuxt-link>
+                            </div>
+                            <div :class="['products-list_item_price','d-flex','flex-column','font-weight-bold',{'justify-content-end':!i.special}]">
+                                <div v-if="i.special">
+                                    <span class="badge rounded-pill bg-danger">{{i.discount}}</span>
+                                    <span class="text-secondary text-decoration-line-through">
+                                        {{i.realPrice}}
+                                    </span>
+                                </div>
+                                <div>{{'تومان'+i.price}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </li>
-        </ul>
+        </div>
+        <div v-else>
+            <ul class="d-flex flex-wrap align-items-between mt-1 list-unstyled m-0">
+                <li v-for="i in items" :key="i.name" class="products-list_item">
+                    <div
+                    class="position-relative d-flex flex-column justify-content-between"
+                    >
+                    <div v-if="i.special" class="products-list_item_special text-danger text-center mx-2">
+                            special sale
+                    </div>
+                    <nuxt-link :to="'/Product/'+subItemPath+'/'+i.id" :class="['products-list_item_img',{'no-special':!i.special}]">
+                        <img :src="i.images[0].address" :alt="i.name">    
+                    </nuxt-link>
+                    <div class="d-flex flex-column mx-3">
+                        <div class="products-list_item_title text-center mb-2">
+                            <nuxt-link :to="'/Product/'+subItemPath+'/'+i.id" class="link-dark">
+                                {{i.name}}
+                            </nuxt-link>
+                        </div>
+                        <div :class="['products-list_item_price','d-flex','flex-column','font-weight-bold',{'justify-content-end':!i.special}]">
+                            <div v-if="i.special">
+                                <span class="badge rounded-pill bg-danger">{{i.discount}}</span>
+                                <span class="text-secondary text-decoration-line-through">
+                                    {{i.realPrice}}
+                                </span>
+                            </div>
+                            <div>{{'تومان'+i.price}}</div>
+                        </div>
+                    </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
       </div>
 </template>
 <script>
 export default {
-  props:{items:Array}
+  props:['items','subItemPath']
 };
 </script>
 <style lang="scss" scoped>
@@ -90,6 +123,6 @@ export default {
   }
 }
 .no-special{
-    margin-top: 29px;
+    padding-top: 29px;
 }
 </style>

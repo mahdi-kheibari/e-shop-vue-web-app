@@ -23,12 +23,14 @@
     -webkit-align-items: center;
     align-items: center;
 }
-
+.swiper-slide a{
+    text-decoration: none !important;
+}
 .swiper-slide img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 .swiper-container-2 .swiper-slide img{
     object-fit: contain;

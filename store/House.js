@@ -3,7 +3,12 @@ export const state = () => ({
         cleaning:[
             {
                 name:"Samsung P1494 Washing Machine - 9 Kg",
-                img:"/images/category/House/cleaning/P1494.jpg",
+                id:"P1494",
+                images:[
+                    {
+                        address:"/images/category/House/cleaning/P1494.jpg",
+                    }
+                ],
                 price:"27,500,000",
                 special:false,
                 discount:"",
@@ -12,7 +17,12 @@ export const state = () => ({
             },
             {
                 name:"Xiaomi cordless vacuum cleaner model 1C",
-                img:"/images/category/House/cleaning/1C.jpg",
+                id:"1C",
+                images:[
+                    {
+                        address:"/images/category/House/cleaning/1C.jpg",
+                    }
+                ],
                 price:"6,500,000",
                 special:true,
                 discount:"10%",
@@ -21,7 +31,12 @@ export const state = () => ({
             },
             {
                 name:"GPlus GDW-J552S Dishwasher",
-                img:"/images/category/House/cleaning/GDW-J552S.jpg",
+                id:"GDW-J552S",
+                images:[
+                    {
+                        address:"/images/category/House/cleaning/GDW-J552S.jpg",
+                    }
+                ],
                 price:"14,575,000",
                 special:true,
                 discount:"7%",
@@ -32,7 +47,12 @@ export const state = () => ({
         "video-audio":[
             {
                 name:"Gplus GTV-50LU722S Smart LED TV 50 Inch",
-                img:"/images/category/House/video_and_audio/GTV-50LU722S.jpg",
+                id:"GTV-50LU722S",
+                images:[
+                    {
+                        address:"/images/category/House/video_and_audio/GTV-50LU722S.jpg",
+                    }
+                ],
                 price:"9,950,000",
                 special:true,
                 discount:"6%",
@@ -41,7 +61,12 @@ export const state = () => ({
             },
             {
                 name:"Sony Playstation 5 game console with a capacity of 825 GB",
-                img:"/images/category/House/video_and_audio/Playstation_5.jpg",
+                id:"Playstation_5",
+                images:[
+                    {
+                        address:"/images/category/House/video_and_audio/Playstation_5.jpg",
+                    }
+                ],
                 price:"27,895,000",
                 special:false,
                 discount:"",
@@ -50,7 +75,12 @@ export const state = () => ({
             },
             {
                 name:"Sony PlayStation 5 PLUS 3D gaming headset",
-                img:"/images/category/House/video_and_audio/PLUS_3D.jpg",
+                id:"PLUS_3D",
+                images:[
+                    {
+                        address:"/images/category/House/video_and_audio/PLUS_3D.jpg",
+                    }
+                ],
                 price:"3,295,000",
                 special:false,
                 discount:"",

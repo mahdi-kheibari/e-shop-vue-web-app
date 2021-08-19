@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="header mb-2">
     <b-navbar toggleable="md" type="light" variant="white" class="py-0">
       <b-navbar-brand href="#" class="ms-4">
         <div class="d-flex justify-content-center">
@@ -86,5 +86,8 @@
 <style scoped>
 .nuxt-logo {
   height: 25px !important;
+}
+.header{
+    box-shadow: 0 7px 8px 0 rgb(0 0 0 / 4%);
 }
 </style>

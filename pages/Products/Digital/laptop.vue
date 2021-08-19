@@ -1,7 +1,7 @@
 <template>
     <div>
          <breadcrumb activeText="laptop" :subCrumb="true" subCrumbName="Digital" />
-         <productList :items="Products" />
+         <productList :items="Products" subItemPath="laptop" />
     </div>
 </template>
 <script>

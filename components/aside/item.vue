@@ -2,7 +2,9 @@
   <li class="mb-1">
     <nuxt-link
       :to="route"
-      class="btn btn-toggle align-items-center rounded collapsed"
+      class="btn btn-toggle align-items-center rounded"
+      exact
+      exact-active-class="active-category"
     >
       {{ name }}
     </nuxt-link>

@@ -10,9 +10,9 @@
             :pagination="true"
             class="categories"
           >
-            <div v-for="i in mainSlider" :key="i.name" class="swiper-slide">
+            <nuxt-link v-for="i in mainSlider" :key="i.name" :to="'/Products/category/'+i.route" class="swiper-slide">
               <img :src="i.address" :alt="i.name" />
-            </div>
+            </nuxt-link>
           </mainSwiper>
         </div>
         <div class="col-6 col-lg-4">
@@ -24,28 +24,29 @@
               :danger="true"
               :pagination="false"
             >
-              <div
-                v-for="i in secondSlider"
+              <nuxt-link
+                v-for="i in discountSlider"
                 :key="i.name"
-                class="swiper-slide flex-column"
+                :to="'/Product/'+i.category+'/'+i.id"
+                class="swiper-slide flex-column link-dark text-decoration-none"
               >
-                <img :src="i.address" :alt="i.name" class="second-card-img" />
+                <img :src="i.images[0].address" :alt="i.name" class="second-card-img" />
                 <p class="text-right">
                   {{ i.name }}
                 </p>
                 <div class="text-left">
                   <span class="badge rounded-pill bg-danger mt-3">{{
-                    i.discountPercent
+                    i.discount
                   }}</span>
                   <span
                     class="text-decoration-line-through text-secondary mt-3"
                     >{{ i.price }}</span
                   >
                 </div>
-                <h5 class="text-left">{{ i.withDiscount }}</h5>
-              </div>
+                <h5 class="text-left">{{ i.realPrice }}</h5>
+              </nuxt-link>
             </mainSwiper>
-            <nuxt-link to="" class="d-block btn btn-block btn-outline-danger">
+            <nuxt-link to="/Products/category/Discounts" class="d-block btn btn-block btn-outline-danger">
               See all
             </nuxt-link>
           </div>
@@ -110,9 +111,37 @@ export default {
     secondSwiper,
   },
   asyncData({ store }) {
+    const products = [];
+    function filteredProduct(product) {
+        const Products = product;
+        for (let key in Products) {
+            const filtered=Products[key].filter((item)=>
+            item.special===true
+            ).map((item)=>{
+                return {
+                    ...item,
+                    category:key
+                }
+            });
+            products.push(...filtered);
+        } 
+    }
+    const allProducts={
+        Digital:store.state.Digital.Products,
+        Fashion:store.state.Fashion.Products,
+        Beauty:store.state.Beauty.Products,
+        House:store.state.House.Products
+    };
+    for (let key in allProducts) {
+        filteredProduct(allProducts[key]);
+    }
+    const discountSlider=[]
+    for (let step = 0; step < 3; step++) {
+        discountSlider.push(products[Math.floor(Math.random()*products.length)]);
+    }
     return {
+      discountSlider,
       mainSlider: store.getters.mainSlider,
-      secondSlider: store.getters.discountSlider,
       otherSliderTitle: store.getters.otherSliderTitle,
       bestsellersSlider: store.getters.bestsellersSlider,
       SpecialBrandsSlider: store.getters.SpecialBrandsSlider,

@@ -6,8 +6,8 @@
     border-radius: 8px;
   }
   .active-category {
-      color: rgba(0, 0, 0, .85);
-      background-color: #00dc82;
+      color: rgba(0, 0, 0, .85) !important;
+      background-color: #00dc82 !important;
   }
   .btn-toggle {
     display: inline-flex;

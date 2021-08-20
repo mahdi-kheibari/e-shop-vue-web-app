@@ -7,8 +7,10 @@
                 <collapseItem name="Products" :visible=true id="collapse-1" :items="allCategories" />
             </div>
             <div slot="afterDivider">
-                <item name="Special discount" route="/" />
+                <item name="Special discount" route="Discounts" />
                 <item name="Recent bestsellers" route="/" />
+                <item name="Electronic needs" route="Electronic" />
+                <item name="For gamers" route="forGamer" />
             </div>
         </asideLayout>
       </div>

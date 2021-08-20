@@ -1,9 +1,22 @@
 
 export const state = () => ({
+    allCategories:["Digital","Fashion","Beauty","House"],
     mainSliderImg: [
-        { name: "gamer", address: '/images/main-slider/gamer.jpg' },
-        { name: "electronic", address: '/images/main-slider/electronic.jpg' },
-        { name: "clothing", address: '/images/main-slider/clothing.jpg' },
+        { 
+            name: "gamer",
+            address: '/images/main-slider/gamer.jpg',
+            route:"forGamer"
+        },
+        {
+             name: "Electronic",
+             address: '/images/main-slider/electronic.jpg',
+             route:"Electronic"
+        },
+        { 
+            name: "Fashion and clothing",
+            address: '/images/main-slider/clothing.jpg',
+            route:"Fashion"
+        },
     ],
     discountSliderImg: [
         {

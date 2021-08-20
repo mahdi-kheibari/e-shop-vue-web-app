@@ -10,12 +10,22 @@
                     {{key}}
                 </div>
             </nuxt-link>
+            <template v-if="products2">
+                <nuxt-link v-for="(i,key) in products2" :key="key" :to="subRoute2+key" class="category-item d-flex flex-column justify-content-center align-items-center mx-4">
+                    <div class="category-item_img">
+                        <img :src="i.cover" :alt="key">
+                    </div>
+                    <div class="font-weight-bold link-dark">
+                        {{key}}
+                    </div>
+                </nuxt-link>
+            </template>
         </div>
     </div>
 </template>
 <script>
 export default {
-    props:{products:Object,subRoute:String}
+    props:{products:Object,products2:Object,subRoute:String,subRoute2:String}
 }
 </script>
 <style lang="scss" scoped>

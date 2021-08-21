@@ -8,9 +8,9 @@
             </div>
             <div slot="afterDivider">
                 <item name="Special discount" route="Discounts" />
-                <item name="Recent bestsellers" route="/" />
                 <item name="Electronic needs" route="Electronic" />
                 <item name="For gamers" route="forGamer" />
+                <item name="Special brands" route="Brands" />
             </div>
         </asideLayout>
       </div>

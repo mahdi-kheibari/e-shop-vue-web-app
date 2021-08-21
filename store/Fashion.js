@@ -41,7 +41,7 @@ export const state = () => ({
                 special:true,
                 discount:"78%",
                 realPrice:"1,529,000",
-                brand:"Xiaomi"
+                brand:"LC Waikiki"
             },
         ],
         male:[

@@ -1,4 +1,5 @@
 export default () => ({
+    specialBrands:["Xiaomi","Samsung","Adidas","Sony"],
     allCategories:{
         "Digital products":
             {

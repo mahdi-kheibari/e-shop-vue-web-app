@@ -57,24 +57,22 @@
             <h3 class="font-weight-bold bestsellers-title d-inline m-2">
             Recent bestsellers
             </h3>
-            <nuxt-link to="" class="btn btn-outline-success me-1">
-                See all
-            </nuxt-link>    
         </div>
         <secondSwiper width="100%" height="225px">
-          <div
-            v-for="i in bestsellersSlider"
+          <nuxt-link
+            v-for="i in bestSellerSlider"
             :key="i.name"
-            class="swiper-slide flex-column mt-1"
+            :to="'/Product/'+i.category+'/'+i.id"
+            class="swiper-slide flex-column mt-1 link-dark text-decoration-none"
           >
-            <img :src="i.address" :alt="i.name" />
+            <img :src="i.images[0].address" :alt="i.name" />
             <p class="text-right w-100 bestsellers-name">
               {{ i.name }}
             </p>
             <span>
               {{ i.price }}
             </span>
-          </div>
+          </nuxt-link>
         </secondSwiper>
       </section>
       <section
@@ -84,18 +82,19 @@
             <h3 class="font-weight-bold brands-title d-inline m-2">
                 Special brands
             </h3>
-            <nuxt-link to="" class="btn btn-outline-success me-1">
+            <nuxt-link to="/Products/category/Brands" class="btn btn-outline-success me-1">
                 See all
             </nuxt-link>    
         </div>
         <secondSwiper width="100%" height="210px" class="Brands">
-          <div
+          <nuxt-link
             v-for="i in SpecialBrandsSlider"
             :key="i.name"
+            :to="'Products/category/Brands#'+i.name"
             class="swiper-slide mt-1"
           >
             <img :src="i.address" :alt="i.name" />
-          </div>
+          </nuxt-link>
         </secondSwiper>
       </section>
     </div>
@@ -112,6 +111,7 @@ export default {
   },
   asyncData({ store }) {
     const products = [];
+    const bestProducts=[];
     function filteredProduct(product) {
         const Products = product;
         for (let key in Products) {
@@ -124,6 +124,14 @@ export default {
                 }
             });
             products.push(...filtered);
+
+            const best=Products[key].map((item)=>{
+                return {
+                    ...item,
+                    category:key
+                }
+            });
+            bestProducts.push(...best);
         } 
     }
     const allProducts={
@@ -135,15 +143,20 @@ export default {
     for (let key in allProducts) {
         filteredProduct(allProducts[key]);
     }
+
     const discountSlider=[]
     for (let step = 0; step < 3; step++) {
         discountSlider.push(products[Math.floor(Math.random()*products.length)]);
     }
+    const bestSellerSlider=[]
+    for (let step = 0; step < 8; step++) {
+        bestSellerSlider.push(bestProducts[Math.floor(Math.random()*bestProducts.length)]);
+    }
     return {
       discountSlider,
+      bestSellerSlider,
       mainSlider: store.getters.mainSlider,
       otherSliderTitle: store.getters.otherSliderTitle,
-      bestsellersSlider: store.getters.bestsellersSlider,
       SpecialBrandsSlider: store.getters.SpecialBrandsSlider,
     };
   },

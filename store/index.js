@@ -75,28 +75,20 @@ export const state = () => ({
     ],
     SpecialBrandsSlider: [
         {
-            name: "HUAWEI",
-            address: '/images/brand-slider/brand-1.jpg'
+            name: "Xiaomi",
+            address: '/images/brand-slider/Xiaomi.jpg'
         },
         {
-            name: "SAMAUNG",
-            address: '/images/brand-slider/brand-2.jpg'
+            name: "Samsung",
+            address: '/images/brand-slider/Samsung.jpg'
         },
         {
-            name: "CASIO",
-            address: '/images/brand-slider/brand-3.jpg'
+            name: "Adidas",
+            address: '/images/brand-slider/Adidas.jpg'
         },
         {
-            name: "Panasonic",
-            address: '/images/brand-slider/brand-4.jpg'
-        },
-        {
-            name: "GPlus",
-            address: '/images/brand-slider/brand-5.jpg'
-        },
-        {
-            name: "NOKIA",
-            address: '/images/brand-slider/brand-6.jpg'
+            name: "Sony",
+            address: '/images/brand-slider/Sony.jpg'
         },
     ]
 

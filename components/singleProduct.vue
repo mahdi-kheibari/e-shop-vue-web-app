@@ -33,8 +33,8 @@
                   <br /><br />
                   <span>
                     <label>Count :</label>
-                    <input type="number" class="search_box" v-model="count" />
-                    <button type="button" class="btn btn-danger cart">
+                    <input type="number" min="1" class="search_box" v-model="count"/>
+                    <button type="button" class="btn btn-danger cart" @click="addToCart">
                       Add to cart
                     </button>
                   </span>
@@ -87,12 +87,36 @@ export default {
     data() {
         return {
             currentImg:this.product.images[0].address,
-            count: 1
+            count:1
         }
     },
     methods:{
       setCurrent(address){
           this.currentImg=address;
+      },
+      addToCart(){
+          this.product['category']=this.subCrumbName;
+          this.$store.dispatch('Cart/addItem',{
+              product:this.product,
+              count:this.count,
+          }).then((res)=>{
+              if(res){
+                this.$store.commit('Cart/changeSumTotal');
+                this.$toast.open({
+                    message: "Successfully added to cart",
+                    type: "success",
+                    duration: 3000,
+                    position:"top-right"
+                })
+              }else{
+                this.$toast.open({
+                    message: "This product is in your shopping cart",
+                    type: "warning",
+                    duration: 3000,
+                    position:"top-right"
+                })
+              }
+          });
       }
     },
     components:{

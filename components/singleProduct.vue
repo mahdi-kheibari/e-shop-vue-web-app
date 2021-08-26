@@ -102,12 +102,13 @@ export default {
           }).then((res)=>{
               if(res){
                 this.$store.commit('Cart/changeSumTotal');
+                this.$store.dispatch('Cart/saveCart');
                 this.$toast.open({
                     message: "Successfully added to cart",
                     type: "success",
                     duration: 3000,
                     position:"top-right"
-                })
+                });
               }else{
                 this.$toast.open({
                     message: "This product is in your shopping cart",

@@ -60,6 +60,9 @@ export const mutations = {
         }else{
             state.sumTotal=0
         }
+    },
+    updateAfterRefresh(state,cartJSON){
+        state.cartItems = cartJSON ? JSON.parse(cartJSON) : [];
     }
 };
 export const actions = {
@@ -86,5 +89,8 @@ export const actions = {
     },
     deleteAll(context){
         context.commit('deleteAll');
+    },
+    saveCart(context){
+        localStorage.setItem("shoppingCart", JSON.stringify(context.state.cartItems));
     }
 };

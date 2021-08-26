@@ -1,3 +1,5 @@
+import 'dotenv/config'
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -37,12 +39,32 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+      // axios is required by @nuxtjs/auth
+    '@nuxtjs/axios',
+    // https://auth.nuxtjs.org
+    '@nuxtjs/auth'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    // axios is required by @nuxtjs/auth
+    '@nuxtjs/axios',
+    // https://auth.nuxtjs.org
+    '@nuxtjs/auth'
   ],
-
+  auth: {
+    redirect: {
+      login: '/', // redirect user when not connected
+      callback: '/auth/signed-in'
+    },
+    strategies: {
+      local: false,
+      auth0: {
+        domain: process.env.AUTH0_DOMAIN,
+        client_id: process.env.AUTH0_CLIENT_ID
+      }
+    }
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

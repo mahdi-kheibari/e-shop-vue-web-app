@@ -22,8 +22,11 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ms-auto">
           <b-nav-item href="#">
-            <b-button variant="outline-danger">
+            <b-button v-if="$auth.loggedIn" @click="$auth.logout()" variant="outline-danger">
               Logout
+            </b-button>
+            <b-button v-else @click="$auth.loginWith('auth0')" variant="outline-danger">
+              Login
             </b-button>
           </b-nav-item>
           <b-nav-item href="#">
@@ -143,7 +146,7 @@
             </div>
             <div class="d-flex">
                 <button type="button" class="btn btn-secondary" @click="hideModal('modal-center')">Back to shopping</button>
-                <button type="button" class="btn btn-primary ms-2">Checkout</button>
+                <button type="button" class="btn btn-primary ms-2" @click="checkout()">Checkout</button>
             </div>
         </div>
       </template>
@@ -235,6 +238,10 @@ export default {
         return {
         }
   },
+  mounted() {
+      var cartJSON = localStorage.getItem("shoppingCart");
+      this.$store.commit('Cart/updateAfterRefresh',cartJSON);
+  },
   methods: {
     hideModal(id) {
       this.$bvModal.hide(id);
@@ -244,10 +251,12 @@ export default {
               productId:id,
         });
         this.$store.commit('Cart/changeSumTotal');
+        this.$store.dispatch('Cart/saveCart');
     },
     deleteAll(){
         this.$store.dispatch('Cart/deleteAll');
         this.$store.commit('Cart/changeSumTotal');
+        this.$store.dispatch('Cart/saveCart');
     },
     changeCount(e,id){
           this.$store.commit('Cart/changeCount',{
@@ -256,6 +265,26 @@ export default {
               });
           this.$store.commit('Cart/changeSingleTotal',id);
           this.$store.commit('Cart/changeSumTotal');
+          this.$store.dispatch('Cart/saveCart');
+    },
+    checkout(){
+        if(this.$auth.loggedIn){
+            this.$store.dispatch('Cart/deleteAll');
+            this.$store.dispatch('Cart/saveCart');
+            this.$toast.open({
+                message: "Successfully paid",
+                type: "success",
+                duration: 3000,
+                position:"top"
+            })
+        }else{
+            this.$toast.open({
+                message: "Please Login first",
+                type: "warning",
+                duration: 3000,
+                position:"top"
+            })
+        }
     }
   },
   computed:{
@@ -281,7 +310,7 @@ export default {
     position: absolute;
     right: 0;
     top: calc(100% - 3px);
-    z-index: 101;
+    z-index: 1053;
     width: 300px;
     border-radius: 8px;
     box-shadow: 0 4px 12px 0 rgb(0 0 0 / 20%);

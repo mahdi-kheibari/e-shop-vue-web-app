@@ -1,22 +1,24 @@
 <template>
   <header class="header mb-2">
     <b-navbar toggleable="md" type="light" variant="white" class="py-0">
-      <b-navbar-brand href="#" class="ms-4">
-        <div class="d-flex justify-content-center">
+      <b-navbar-brand class="ms-4">
+        <nuxt-link to="/" class="d-flex justify-content-center link-dark text-decoration-none">
           <NuxtLogo />
           &nbsp;
           <span> E-Shop</span>
-        </div>
+        </nuxt-link>
       </b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-input-group class="w-50 mx-lg-auto mt-1 mt-lg-0">
-          <b-form-input placeholder="Search"></b-form-input>
+          <input type="text" class="form-control bg-light" placeholder="Search" :value="searchValue" @change="changeSearchValue" @keyup.enter="$router.push({name:'Products-category-All',query:{search:searchValue}})" />
           <b-input-group-append>
-            <b-button variant="outline-success"
-              ><b-icon icon="search"></b-icon
-            ></b-button>
+            <nuxt-link :to="{name:'Products-category-All',query:{search:searchValue}}">
+                <b-button variant="outline-success"
+                ><b-icon icon="search"></b-icon
+                ></b-button>
+            </nuxt-link>
           </b-input-group-append>
         </b-input-group>
         <!-- Right aligned nav items -->
@@ -236,11 +238,19 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
         return {
+            test:"test"
         }
   },
   mounted() {
       var cartJSON = localStorage.getItem("shoppingCart");
       this.$store.commit('Cart/updateAfterRefresh',cartJSON);
+  },
+  watch:{
+      '$route.query'(){
+          if(this.$route.query.search===undefined){
+              this.$store.commit('removeSearchValue');
+          }
+      }
   },
   methods: {
     hideModal(id) {
@@ -285,11 +295,15 @@ export default {
                 position:"top"
             })
         }
+    },
+    changeSearchValue(e){
+        this.$store.commit('changeSearchValue',e.target.value);
     }
   },
   computed:{
       ...mapGetters("Cart",["getItems"]),
       ...mapGetters("Cart",["getTotal"]),
+      ...mapGetters(["searchValue"]),
       count(){
             return this.$store.state.Cart.count;
       }

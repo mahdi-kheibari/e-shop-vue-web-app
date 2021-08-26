@@ -1,5 +1,6 @@
 
 export const state = () => ({
+    searchValue:'',
     allCategories:["Digital","Fashion","Beauty","House"],
     mainSliderImg: [
         { 
@@ -47,8 +48,16 @@ export const getters = {
     },
     SpecialBrandsSlider(state) {
         return state.SpecialBrandsSlider;
+    },
+    searchValue(state) {
+        return state.searchValue;
     }
 }
 export const mutations = {
-
+    changeSearchValue(state,newVal){
+        state.searchValue=newVal
+    },
+    removeSearchValue(state){
+        state.searchValue=""
+    },
 }

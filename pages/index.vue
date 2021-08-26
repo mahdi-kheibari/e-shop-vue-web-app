@@ -146,11 +146,17 @@ export default {
 
     const discountSlider=[]
     for (let step = 0; step < 3; step++) {
-        discountSlider.push(products[Math.floor(Math.random()*products.length)]);
+        const random=products[Math.floor(Math.random()*products.length)];
+        if(!discountSlider.some(item=>item.id===random.id)){
+            discountSlider.push(random);
+        }
     }
     const bestSellerSlider=[]
     for (let step = 0; step < 8; step++) {
-        bestSellerSlider.push(bestProducts[Math.floor(Math.random()*bestProducts.length)]);
+        const random=bestProducts[Math.floor(Math.random()*bestProducts.length)];
+        if(!bestSellerSlider.some(item=>item.id===random.id)){
+            bestSellerSlider.push(random);
+        }
     }
     return {
       discountSlider,

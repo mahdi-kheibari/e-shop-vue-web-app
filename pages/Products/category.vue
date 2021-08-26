@@ -4,6 +4,7 @@
       <div class="col-2">
         <asideLayout>
             <div slot="beforeDivider">
+                <item name="All products" route="All" />
                 <collapseItem name="Products" :visible=true id="collapse-1" :items="allCategories" />
             </div>
             <div slot="afterDivider">

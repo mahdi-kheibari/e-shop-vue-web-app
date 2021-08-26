@@ -39,10 +39,6 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-      // axios is required by @nuxtjs/auth
-    '@nuxtjs/axios',
-    // https://auth.nuxtjs.org
-    '@nuxtjs/auth'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

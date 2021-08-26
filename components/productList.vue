@@ -1,7 +1,7 @@
 <template>
        <div class="products-list bg-white mb-3">
         <div v-if="Array.isArray(items)===false" class="d-flex flex-wrap">
-            <ul class="d-flex flex-wrap mt-1 m-0 list-unstyled">
+            <ul class="d-flex w-100 flex-wrap mt-1 m-0 list-unstyled">
                 <template v-for="(item,key) in items">
                     <li v-for="i in item" :key="i.name" class="products-list_item">
                         <div
@@ -36,7 +36,7 @@
             </ul>
         </div>
         <div v-else>
-            <ul class="d-flex flex-wrap align-items-between mt-1 list-unstyled m-0">
+            <ul class="d-flex w-100 flex-wrap align-items-between mt-1 list-unstyled m-0">
                 <li v-for="i in items" :key="i.name" class="products-list_item">
                     <div
                     class="position-relative d-flex flex-column justify-content-between"

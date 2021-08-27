@@ -218,7 +218,7 @@
             </li>
             <li>
               <nuxt-link
-                to="/about"
+                to="/"
                 exact
                 exact-active-class="active"
                 class="nav-link link-dark"

@@ -56,7 +56,7 @@ export default {
     strategies: {
       local: false,
       auth0: {
-        domain: process.env.AUTH0_DOMAIN,
+        domain: 'dev-9vtpsxjd.us.auth0.com',
         client_id: process.env.AUTH0_CLIENT_ID
       }
     }

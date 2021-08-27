@@ -1,5 +1,8 @@
 # e-shop
 
+> view generated of this project on this link (ability to register):
+https://e-shop-vue.netlify.app/
+
 ## Build Setup
 
 ```bash
@@ -18,6 +21,17 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+
+## For test Authentication
+
+1-Create an account at Auth0 (https://auth0.com) and create new application with some settings below.
+* Allowed Callback URLs: http://localhost:3000/auth/signed-in
+* Allowed Web Origins: http://localhost:3000
+* Allowed Logout URLs: http://localhost:3000
+
+2-rename file `.env.example` as `.env` and add your Auth0 client id
+
+3-in `nuxt.config.js` change `domain` in auth module to your Auth0 domain name
 
 ## Special Directories
 

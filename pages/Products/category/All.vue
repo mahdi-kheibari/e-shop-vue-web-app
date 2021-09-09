@@ -1,13 +1,13 @@
 <template>
     <div>
         <productList :items="searched ? filteredBySearch:products" />
-        <div v-if="Object.keys(filteredBySearch).length === 0" class="alert alert-warning">
+        <div v-if="searched && Object.keys(filteredBySearch).length === 0" class="alert alert-warning">
           Nothing found
         </div>
     </div>
 </template>
 <script>
-import productList from "@/components/productList.vue";
+import productList from "@/components/productlist/productList.vue";
 export default {
   data() {
     return {

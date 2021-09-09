@@ -1,0 +1,66 @@
+$primary:#00C58E;
+$primary-light:#00e0a1;
+$secondary:#2f495e;
+$success:#22C157;
+$info:#176AEF;
+$warning:#E8D912;
+$danger:#f0403a;
+$light:#edf2f7;
+$dark:#2c3e50;
+$black:#000;
+$white:#fff;
+$gray:#a1a3a8;
+$body-color:$secondary;
+
+$theme-colors: (
+    "primary": $primary,
+    "primary-light":$primary-light,
+    "secondary": $secondary,
+    "success": $success,
+    "info": $info,
+    "warning": $warning,
+    "danger": $danger,
+    "light": $light,
+    "dark": $dark,
+    "black":$black,
+    "white":$white,
+    "gray":$gray
+);
+
+$font-weight-lighter:         lighter;
+$font-weight-light:           300;
+$font-weight-normal:          400;
+$font-weight-bold:            500;
+$font-weight-bolder:          700;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl:1400px
+);
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl:1320px
+);
+$spacer: 1rem;
+$spacers: ();
+$spacers: map-merge(
+  (
+    0: 0,
+    1: ($spacer * .25),//4px
+    2: ($spacer * .5),//8px
+    3: $spacer,//16px
+    4: ($spacer * 1.5),//24px
+    5: ($spacer * 3),//48px
+    "section": ($spacer * 2.3125),//37px between section
+    "related": $spacer //16px between related sections
+  ),
+  $spacers
+);
+$grid-gutter-width: $spacer;

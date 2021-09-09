@@ -4,7 +4,7 @@
       :to="route"
       class="btn btn-toggle align-items-center rounded"
       exact
-      exact-active-class="active-category"
+      exact-active-class="active-category text-primary"
     >
       {{ name }}
     </nuxt-link>

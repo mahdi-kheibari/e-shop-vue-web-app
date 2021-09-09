@@ -1,8 +1,8 @@
 <template>
   <li class="mb-1">
     <b-button
-      variant="light"
-      class="btn-toggle"
+      variant="white"
+      class="btn-toggle text-secondary"
       :v-b-toggle="id"
       @click="collapse = !collapse"
     >
@@ -15,7 +15,7 @@
           <nuxt-link
             :to="i.route"
             exact
-            exact-active-class="active-category"
+            exact-active-class="active-category text-primary"
             class="link-dark rounded"
           >
             {{ key }}

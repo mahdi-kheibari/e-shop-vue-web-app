@@ -9,8 +9,8 @@
     <div v-if="pagination" class="swiper-pagination"></div>
 
     <!-- If we need navigation buttons -->
-    <div :class="['swiper-button-prev',{'text-success':!danger,'text-danger':danger}]"></div>
-    <div :class="['swiper-button-next',{'text-success':!danger,'text-danger':danger}]"></div>
+    <div class="swiper-button-prev text-secondary"></div>
+    <div class="swiper-button-next text-secondary"></div>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ export default {
       loop: true,
       pagination: {
         el: ".swiper-pagination",
-        dynamicBullets: true,
+        clickable:true
       },
       navigation: {
         nextEl: ".swiper-button-next",
@@ -32,7 +32,7 @@ export default {
       },
       effect: "fade",
       autoplay: {
-        delay: 2500,
+        delay: 3500,
         disableOnInteraction: false,
       }
     });

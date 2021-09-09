@@ -1,8 +1,10 @@
 /* for swiper */
 
 .swiper-container-2 {
+    padding: 6px 4px;
     overflow: hidden;
     position: absolute;
+    margin-bottom: 11px;
 }
 
 .swiper-slide {
@@ -23,16 +25,18 @@
     -webkit-align-items: center;
     align-items: center;
 }
-.swiper-slide a{
-    text-decoration: none !important;
-}
 .swiper-slide img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 .swiper-container-2 .swiper-slide img{
     object-fit: contain;
-    height: 65%;
+}
+.swiper-button-next,swiper-button-prev{
+    font-size: 14px !important;
+}
+.swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled{
+    pointer-events: auto !important;
 }

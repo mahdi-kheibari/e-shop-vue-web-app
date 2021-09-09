@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white mb-2">
+  <div class="bg-white pb-2">
     <section class="container">
       <div class="row">
         <div class="col-12">
@@ -21,31 +21,51 @@
               </div>
             </div>
             <div class="col-12 col-sm-7">
-              <breadcrumb :activeText="params" :subCrumbSingle="true" :subPath="subPath" :subCrumbName="subCrumbName" class="ms-3" />
+              <breadcrumb :activeText="params" :subCrumbSingle="true" :subPath="subPath" :subCrumbName="subCrumbName" class="ml-3 single-breadcrumb" />
               <div class="product-information">
-                <div>
+                <div class="product-information_name">
                   <h2>{{ product.name }}</h2>
                 </div>
-                <div>
-                  <span>
-                    <span>Price : {{ product.price }} toman</span>
-                  </span>
-                  <br /><br />
-                  <span>
-                    <label>Count :</label>
-                    <input type="number" min="1" class="search_box" v-model="count"/>
-                    <button type="button" class="btn btn-danger cart" @click="addToCart">
-                      Add to cart
-                    </button>
-                  </span>
-                </div>
-                <div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Quibusdam impedit neque magni officiis aspernatur? Omnis
-                    culpa vitae quaerat modi animi praesentium quia quisquam vel
-                    reiciendis nisi ipsam, distinctio rerum maiores.
-                  </p>
+                <div class="row h-100 mt-2">
+                    <div class="col-7 h-100">
+                        <p class="my-auto">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Quibusdam impedit neque magni officiis aspernatur? Omnis
+                            culpa vitae quaerat modi animi praesentium quia quisquam vel
+                            reiciendis nisi ipsam, distinctio rerum maiores.
+                        </p>
+                    </div>
+                    <div class="col-5">
+                        <div class="product-information-cart bg-light p-3">
+                            <div class="pb-2 d-flex justify-content-between font-18">
+                                <span>Seller</span>
+                                <span>Lorem...</span>
+                            </div>
+                            <hr class="m-0">
+                            <div class="py-2 d-flex justify-content-between">
+                                <label class="font-18">Count :</label>
+                                <input type="number" min="1" class="search_box rounded" v-model="count"/>
+                            </div>
+                            <hr class="m-0">
+                            <div class="py-2">
+                                <div v-if="product.special">
+                                    <div class="text-left">
+                                        <span class="font-18 badge text-white rounded-pill bg-danger m-0">
+                                            {{product.discount}}
+                                        </span>
+                                        <span
+                                            class="font-16 text-muted text-decoration-line-through text-secondary m-0"
+                                            >{{product.realPrice}}</span
+                                        >
+                                    </div>
+                                </div>
+                                <div class="text-left font-20 font-weight-bold"><span class="font-weight-normal">Price : </span>{{ product.price }} <span class="font-16 font-weight-normal">toman</span></div>
+                            </div>
+                            <button type="button" class="btn btn-block btn-primary font-weight-bold" @click="addToCart">
+                                Add to cart
+                            </button>
+                        </div>
+                    </div>
                 </div>
               </div>
             </div>
@@ -53,30 +73,40 @@
         </div>
       </div>
     </section>
-    <section class="similar container bg-white my-3">
-        <div>
-            <h3 class="font-weight-bold similar-title d-inline m-2">
-            Similar Products
-            </h3>   
+    <section class="similars container bg-white mt-section">
+        <div class="similars-header d-flex justify-content-between align-items-baseline">
+            <h2 class="similars-title d-inline py-2 font-20">
+                Similar Products
+            </h2>
         </div>
-        <secondSwiper width="100%" height="225px" class="Brands">
+        <secondSwiper width="100%" height="330px">
           <nuxt-link
             v-for="i in similarProducts.filter(i=>i.id!==product.id)"
             :key="i.name"
             :to="'/Product/'+subCrumbName+'/'+i.id"
-            class="swiper-slide flex-column mt-1 link-dark text-decoration-none"
+            class="swiper-slide flex-column pt-1 pb-3 px-3 similar"
           >
-            <img :src="i.images[0].address" :alt="i.name" />
-            <p class="text-right w-100 similar-name">
-              {{ i.name }}
-            </p>
-            <span>
-              {{ i.price }}
-            </span>
+            <div class="similar-img mx-auto">
+                <img :src="i.images[0].address" :alt="i.name" />
+            </div>
+            <div class="similar-caption my-auto text-center d-flex flex-column align-items-center justify-content-between">
+                <p :class="[{'caption_nameTwoLine':!i.special},{'caption_nameOneLine':i.special},'text-left','mx-2','mb-0','font-14']">
+                {{ i.name }}
+                </p>
+                <div v-if="i.special" class="mt-3">
+                    <span class="font-14 badge text-white rounded-pill bg-danger">
+                        {{i.discount}}
+                    </span>
+                    <span
+                        class="font-14 text-muted text-decoration-line-through text-secondary"
+                        >{{ i.realPrice }}</span
+                    >
+                </div>
+                <div class="font-16 font-weight-bold">{{i.price}} <span class="font-14 font-weight-normal">toman</span></div>
+            </div>
           </nuxt-link>
         </secondSwiper>
-    </section>
-    <br>
+      </section>
   </div>
 </template>
 <script>
@@ -128,20 +158,9 @@ export default {
 }
 </script>
 <style lang="scss">
-.similar{
-    height: 285px;
-    width: 100%;
-    border-radius: 8px;
-    position: relative;
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
-    &-name {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    &-title {
-        border-bottom: #dc3545 1px solid;
-    }
+.similars{
+    box-shadow: none !important;
+    border: 1px solid #e0e0e2;
 }
 .product-details {
   margin-bottom: 40px;
@@ -190,50 +209,28 @@ export default {
 }
 .product-information {
   overflow: hidden;
-  padding-bottom: 40px;
-  padding-top: 10px;
   position: relative;
+  &-cart{
+      width: 100%;
+      height: 100%;
+      border:1px solid #e0e0e2 ;
+      border-radius: 8px;
+  }
+  &_name{
+      border-bottom: solid 1px #f2f2f2;
+      padding: 8px 30px;
+  }
 }
-
-.product-information div {
-  border-bottom: solid 1px #f2f2f2;
-  padding: 20px 30px 10px;
-}
-.product-information h2 {
-  color: #363432;
-  margin-top: 0;
-}
-
-.product-information p {
-  color: #696763;
-  margin-bottom: 5px;
-}
-
-.product-information span {
-  display: inline-block;
-  margin-bottom: 5px;
-  margin-top: 5px;
-}
-
-.product-information span span {
-  font-size: 25px;
-  margin-left: 20px;
-  margin-top: 0px;
-}
-.product-information span input {
+.product-information input {
   border: 1px solid #dededc;
   color: #696763;
   font-size: 20px;
   height: 33px;
   outline: medium none;
-  text-align: center;
-  width: 50px;
+  text-align: left;
+  width: 70%;
 }
 
-.product-information span label {
-  color: #696763;
-  margin-left: 5px;
-}
 .search_box input {
   text-align: right;
   background: #f0f0e9;
@@ -254,5 +251,8 @@ export default {
 .current{
     opacity: 1 !important;
     border-color: #10DE89 !important;
+}
+.single-breadcrumb.breadcrumb{
+    background-color: #fff !important;
 }
 </style>

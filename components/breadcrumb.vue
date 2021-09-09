@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex mb-1">
+  <div class="d-flex mb-1 breadcrumb bg-light">
     <nuxt-link to="/" exact>
         Home
     </nuxt-link>
@@ -15,7 +15,7 @@
         {{subCrumbName}}
     </nuxt-link>
     <span v-if="subCrumb || subCrumbSingle" class="breadcrumb-divider">/</span>
-    <span class="text-secondary">
+    <span class="text-muted">
       {{ activeText }}
     </span>
   </div>

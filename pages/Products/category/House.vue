@@ -12,7 +12,7 @@
 <script>
 import category from '@/components/category.vue';
 import breadcrumb from "@/components/breadcrumb.vue";
-import productList from "@/components/productList.vue";
+import productList from "@/components/productlist/productList.vue";
 export default {
     computed: {
         productsCategory() {

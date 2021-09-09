@@ -1,0 +1,127 @@
+@import './variable';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+body{
+    overflow-x: hidden !important;
+    font-family: 'Roboto', sans-serif;
+    background-color: $light;
+}
+// .font-12{
+//     font-size: .75rem;//for 
+// }
+.font-14{
+    font-size: .875rem !important;//for sub paragraph
+}
+.font-16{
+    font-size: 1rem !important;//like h4, for paragraph
+}
+.font-18{
+    font-size: 1.125rem !important;//like h3&for bold text on p,btn,sub title
+}
+.font-20{
+    font-size: 1.25rem !important;//primary btn,title
+}
+.font-24{
+    font-size: 1.5rem !important;//like h2
+}
+.font-32{
+    font-size: 32rem !important;//like h1
+}
+a{
+    color: $secondary !important;
+    text-decoration: none;
+    &:hover{
+        text-decoration: none;
+    }
+}
+.text-decoration-line-through{
+    text-decoration: line-through;
+}
+.btn-primary{
+    font-size: 16px !important;
+    &:hover{
+        background-color: $primary-light !important;
+        color:$white !important;
+        border-color: $primary !important;
+    }
+}
+// for appHeader
+@mixin hoverCart {
+    color:$primary !important;
+    border:1px solid $primary !important;
+    border-radius: 4px !important;
+}
+@mixin activeNavItem {
+    color:$primary !important;
+        svg{
+            color:$primary !important;
+        }
+    border-bottom: 1px solid $primary;
+}
+.form-control:focus{
+    box-shadow: none;
+}
+.cart-icon,.auth-icon,.discount-btn{
+    border:1px solid $white !important;
+    padding: 0 8px !important;
+    transition: all 0.5s linear;
+    &:hover{
+        @include hoverCart;
+    }
+}
+.shop-cart:hover{
+    .cart-icon{
+        @include hoverCart;
+    }
+}
+
+a.bg-white:hover, a.bg-white:focus, button.bg-white:hover, button.bg-white:focus{
+    background-color: $white !important;
+}
+.second-navbar{
+    .btn{
+        border: none;
+        border-radius: 0 !important;
+        border-bottom: 1px solid $white;
+        &:hover,&:active,&:focus{
+            background-color: $white !important;
+            box-shadow: none;
+        }
+        &:hover{
+            @include activeNavItem;
+        }
+    }
+}
+.active-navbar-item{
+    .btn{
+        @include activeNavItem;
+    }
+}
+.btn-toggle:hover,
+.btn-toggle:focus {
+    color: $primary !important;
+}
+.btn-toggle-nav a:hover{
+    color: $primary !important;
+}
+
+// for index page
+.swiper-pagination-bullet-active {
+    background: $primary !important;
+}
+//for category component
+.category{
+    a{
+        &:hover{
+            background-color: $light !important;
+            color: $primary !important;
+        }
+    }
+}
+//for breadcrumb
+.breadcrumb{
+    a{
+        &:hover{
+            color: $primary !important;
+        }
+    }
+}

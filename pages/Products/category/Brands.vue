@@ -2,14 +2,14 @@
   <div class="row">
     <section class="col-12 col-sm-10">
       <breadcrumb activeText="Special brands" />
-      <div class="brand-swiper mb-3 py-1 bg-white" v-for="(item,key) in (changeBrands) ? specialBrands:brands" :key="key">
-            <div class="d-flex justify-content-center align-items-baseline mb-2" :id="key">
-                <div class="brand-swiper_logo mt-2 mx-1">
+      <div class="brand-swiper mb-section py-2 bg-white" v-for="(item,key) in (changeBrands) ? specialBrands:brands" :key="key">
+            <div class="d-flex justify-content-center align-items-center mb-2" :ref="key" :id="key">
+                <div class="brand-swiper_logo">
                     <img :src="'/images/brand-slider/'+key+'.jpg'" :alt="key" class="rounded">
                 </div>
-                <h4>{{key}}</h4>
+                <h4 class="m-0">{{key}}</h4>
             </div>
-            <productList :items="item" />
+            <productList :items="item" class="brand-swiper_product" />
       </div>
     </section>
     <section class="col-sm-2">
@@ -31,7 +31,7 @@
 </template>
 <script>
 import breadcrumb from "@/components/breadcrumb.vue";
-import productList from "@/components/productList.vue";
+import productList from "@/components/productlist/productList.vue";
 export default {
   data() {
     return {
@@ -52,7 +52,7 @@ export default {
               }
               this.changeBrands=true
           }
-      }
+      },
   },
   components: {
     breadcrumb,
@@ -88,10 +88,6 @@ export default {
     };
   },
   scrollToTop: true
-//   fetch({query}){
-//       this.checkedBrands=[query.brand];
-//       console.log(this.checkedBrands);
-//   }
 };
 </script>
 <style lang="scss" scoped>
@@ -102,6 +98,11 @@ export default {
     border-radius: 16px;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
     overflow-y: scroll;
+    /* Firefox */
+    scrollbar-color:rgba(204, 204, 204, 0.705) transparent; 
+    scrollbar-width: 10px;
+    scrollbar-arrow-color: transparent; 
+    // chrome
     &::-webkit-scrollbar{
         width: 10px;
     }
@@ -124,6 +125,9 @@ export default {
             object-fit: contain;
             object-position: center;
         }
+    }
+    &_product{
+        margin-left: 10px;
     }
 }
 </style>

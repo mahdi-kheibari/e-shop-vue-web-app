@@ -16,7 +16,4 @@ export default {
 .error{
     height: calc(100vh - 173px);
 }
-a{
-    text-decoration:none;
-}
 </style>

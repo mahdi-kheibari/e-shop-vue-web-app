@@ -1,120 +1,128 @@
 <template>
   <header class="header sticky-top mb-4">
-    <b-navbar toggleable="md" type="light" variant="white" class="py-0">
-      <b-navbar-brand class="ml-4">
-        <nuxt-link to="/" class="d-flex justify-content-center link-dark">
-          <NuxtLogo />
-          &nbsp;
-          <span> E-Shop</span>
-        </nuxt-link>
+    <b-navbar
+      toggleable="sm"
+      type="light"
+      variant="white"
+      class="py-2 py-sm-1 px-sm-1 d-flex flex-wrap justify-content-between align-items-center"
+    >
+      <b-navbar-brand class="w-50 header-brand d-flex justify-content-start w-sm-auto m-0 ml-sm-2 p-0 order-1">
+        <div
+          to="/"
+          class="d-flex justify-content-center align-items-baseline"
+        >
+          <div class="m-1 ml-0 mr-2 d-block d-sm-none ">
+            <button v-b-toggle.sidebar-1 class="btn bg-white text-secondary px-2">
+                    <div class="font-weight-bolder font-24">
+                        <b-icon icon="list"></b-icon>
+                    </div>
+            </button>
+          </div>
+          <nuxt-link to="/" class="d-flex align-items-baseline align-self-center font-weight-bold">
+            <NuxtLogo />
+            &nbsp;
+            <span> E-<span class="text-primary">Shop</span></span>
+          </nuxt-link>
+        </div>
       </b-navbar-brand>
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-      <b-collapse id="nav-collapse" is-nav>
-        <b-input-group class="w-50 mx-lg-auto mt-1 mt-lg-0">
-          <input
+      <b-navbar-nav class="w-50 header-other w-sm-auto flex-row justify-content-end justify-content-sm-start order-2 order-sm-3">
+        <b-nav-item href="#">
+          <b-button
+            @click="$auth.loggedIn ? $auth.logout() : $auth.loginWith('auth0')"
+            v-b-tooltip.hover.left="$auth.loggedIn ? 'Logout' : 'Login'"
+            class="auth-icon text-secondary bg-white p-0 d-flex align-items-end"
+          >
+            <b-icon
+              :icon="$auth.loggedIn ? 'person-check' : 'person'"
+              font-scale="2.25"
+            ></b-icon>
+          </b-button>
+        </b-nav-item>
+        <b-nav-item href="#" class="">
+          <div class="shop-cart">
+            <b-button
+              v-b-modal.modal-center
+              variant="white"
+              class="shop-cart-btn text-secondary bg-white p-0 d-flex align-items-end cart-icon"
+            >
+              <div class="position-relative">
+                <b-icon icon="cart" font-scale="2.15"></b-icon>
+                <span
+                  class="position-absolute cart-badge text-danger font-weight-bold"
+                >
+                  {{ getItems.length > 0 ? getItems.length : 0 }}
+                </span>
+              </div>
+            </b-button>
+            <div class="shop-cart-info bg-white p-3">
+              <div class="d-flex justify-content-between pb-1">
+                <span class="text-dark">0 Product</span>
+                <span v-b-modal.modal-center class="text-info">View cart</span>
+              </div>
+              <hr class="text-secondary" />
+              <ul class="list-unstyled">
+                <li v-for="item in getItems" :key="item.id">
+                  <nuxt-link
+                    :to="'/Product/' + item.category + '/' + item.id"
+                    class="d-flex justify-content-between align-items-start my-1 link-dark"
+                  >
+                    <div class="shop-cart-info-img h-100 align-self-center">
+                      <img :src="item.images[0].address" :alt="item.name" />
+                    </div>
+                    <div class="shop-cart-info-title">
+                      <span class="mb-1">
+                        {{ item.name }}
+                      </span>
+                    </div>
+                  </nuxt-link>
+                  <div class="d-flex justify-content-between">
+                    <span class="text-secondary">count : {{ item.count }}</span>
+                    <b-icon
+                      icon="trash"
+                      class="text-danger"
+                      @click="deleteItem(item.id)"
+                    ></b-icon>
+                  </div>
+                  <hr class="text-secondary" />
+                </li>
+              </ul>
+              <div class="d-flex justify-content-between my-2 text-dark">
+                <span>Total</span>
+                <span v-if="getItems.length > 0">{{ getTotal }} toman</span>
+              </div>
+            </div>
+          </div>
+        </b-nav-item>
+      </b-navbar-nav>
+     <div class="w-100 header-search px-1 order-3 order-sm-2">
+        <b-input-group class="w-100 mx-sm-0 mt-1">
+            <input
             type="text"
             class="form-control bg-light text-secondary"
             placeholder="Search"
             :value="searchValue"
             @change="changeSearchValue"
             @keyup.enter="
-              $router.push({
+                $router.push({
                 name: 'Products-category-All',
                 query: { search: searchValue },
-              })
+                })
             "
-          />
-          <b-input-group-append>
+            />
+            <b-input-group-append>
             <nuxt-link
-              :to="{
+                :to="{
                 name: 'Products-category-All',
                 query: { search: searchValue },
-              }"
+                }"
             >
-              <b-button variant="primary"
+                <b-button variant="primary"
                 ><b-icon icon="search"></b-icon
-              ></b-button>
+                ></b-button>
             </nuxt-link>
-          </b-input-group-append>
+            </b-input-group-append>
         </b-input-group>
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
-          <b-nav-item href="#">
-            <b-button
-              @click="
-                $auth.loggedIn ? $auth.logout() : $auth.loginWith('auth0')
-              "
-              v-b-tooltip.hover.left="$auth.loggedIn ? 'Logout' : 'Login'"
-              class="auth-icon text-secondary bg-white p-0 d-flex align-items-end"
-            >
-              <b-icon
-                :icon="$auth.loggedIn ? 'person-check' : 'person'"
-                font-scale="2.25"
-              ></b-icon>
-            </b-button>
-          </b-nav-item>
-          <b-nav-item href="#" class="">
-            <div class="shop-cart">
-              <b-button
-                v-b-modal.modal-center
-                variant="white"
-                class="shop-cart-btn text-secondary bg-white p-0 d-flex align-items-end cart-icon"
-              >
-                <div class="position-relative">
-                  <b-icon icon="cart" font-scale="2.15"></b-icon>
-                  <span
-                    class="position-absolute cart-badge text-danger font-weight-bold"
-                  >
-                    {{ getItems.length > 0 ? getItems.length : 0 }}
-                  </span>
-                </div>
-              </b-button>
-              <div class="shop-cart-info bg-white p-3">
-                <div class="d-flex justify-content-between pb-1">
-                  <span class="text-dark">0 Product</span>
-                  <span v-b-modal.modal-center class="text-info"
-                    >View cart</span
-                  >
-                </div>
-                <hr class="text-secondary" />
-                <ul class="list-unstyled">
-                  <li v-for="item in getItems" :key="item.id">
-                    <nuxt-link
-                      :to="'/Product/' + item.category + '/' + item.id"
-                      class="d-flex justify-content-between align-items-start my-1 link-dark"
-                    >
-                      <div class="shop-cart-info-img h-100 align-self-center">
-                        <img :src="item.images[0].address" :alt="item.name" />
-                      </div>
-                      <div class="shop-cart-info-title">
-                        <span class="mb-1">
-                          {{ item.name }}
-                        </span>
-                      </div>
-                    </nuxt-link>
-                    <div class="d-flex justify-content-between">
-                      <span class="text-secondary"
-                        >count : {{ item.count }}</span
-                      >
-                      <b-icon
-                        icon="trash"
-                        class="text-danger"
-                        @click="deleteItem(item.id)"
-                      ></b-icon>
-                    </div>
-                    <hr class="text-secondary" />
-                  </li>
-                </ul>
-                <div class="d-flex justify-content-between my-2 text-dark">
-                  <span>Total</span>
-                  <span v-if="getItems.length > 0">{{ getTotal }} toman</span>
-                </div>
-              </div>
-            </div>
-          </b-nav-item>
-        </b-navbar-nav>
-      </b-collapse>
+     </div>
     </b-navbar>
     <b-modal id="modal-center" size="xl" scrollable centered>
       <template slot="modal-header">
@@ -137,13 +145,13 @@
                   <th class="text-center py-3 px-4" style="min-width: 400px;">
                     Product Name &amp; Details
                   </th>
-                  <th class="text-right py-3 px-4" style="width: 100px;">
+                  <th class="text-center py-3 px-4" style="width: 100px;">
                     Price
                   </th>
                   <th class="text-center py-3 px-4" style="width: 120px;">
                     Quantity
                   </th>
-                  <th class="text-right py-3 px-4" style="width: 100px;">
+                  <th class="text-center py-3 px-4" style="width: 100px;">
                     Total
                   </th>
                   <th
@@ -212,25 +220,25 @@
       </div>
       <template v-if="getItems.length > 0" slot="modal-footer">
         <div class="w-100 d-flex justify-content-between align-items-center">
-          <div class="d-flex">
-            <label class="close text-muted font-weight-normal m-0"
+          <div class="d-flex flex-shrink-0">
+            <label class="text-muted font-weight-bold m-0 font-16 font-sm-18 font-lg-20"
               >Total price</label
             >
-            <div class="close">
+            <div class="font-16 font-sm-18  font-lg-20">
               : <strong> {{ getTotal }} </strong> toman
             </div>
           </div>
           <div class="d-flex">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-secondary font-12 font-sm-14 font-md-16"
               @click="hideModal('modal-center')"
             >
-              Back to shopping
+              {{getWidth>=768?'Back to shopping':'Back'}}
             </button>
             <button
               type="button"
-              class="btn btn-primary ml-2"
+              class="btn checkout btn-primary ml-1 ml-sm-2 font-12 font-sm-14 font-md-16"
               @click="checkout()"
             >
               Checkout
@@ -239,54 +247,75 @@
         </div>
       </template>
     </b-modal>
-    <b-navbar type="secondary" variant="white" class="second-navbar py-0 pt-1">
-      <!-- <b-button v-b-toggle.sidebar-1 class="btn-white text-secondary ml-2"> -->
-      <div
-        class="navbar-item-all"
-        @mouseenter="showMenu('allCategories')"
-        @mouseleave="disappearMenu('allCategories')"
+    <div class="d-none d-sm-block">
+      <b-navbar
+        type="secondary"
+        variant="white"
+        class="second-navbar py-0 pt-1"
       >
-        <nuxt-link to="/Products" class="position-relative">
-          <b-button
-            class="btn-white text-secondary ml-2 px-3 pr-4"
-            @mouseover="showMenu('allCategories')"
-          >
-            <b-icon icon="list"></b-icon><span>Categories</span>
-          </b-button>
-        </nuxt-link>
         <div
-          class="all-categories position-absolute p-0"
-          ref="allCategories"
-          style="display:none;"
+          class="navbar-item-all"
+          @mouseenter="showMenu('allCategories')"
+          @mouseleave="disappearMenu('allCategories')"
         >
-          <div class="position-relative w-100 h-100">
-            <div class="all-categories_backdrop position-absolute" @mouseenter="disappearMenu('allCategories')"></div>
-            <div
-              class="all-categories_background bg-white rounded-bottom position-absolute ml-2"
-              @mouseleave="disappearMenu('allCategories')"
+          <nuxt-link to="/Products" class="position-relative">
+            <b-button
+              class="btn-white text-secondary ml-2 px-3 pr-4"
+              @mouseover="showMenu('allCategories')"
             >
-              <ul class="btn-toggle-nav list-unstyled small d-flex">
-                <li v-for="(i, key) in allCategories" :key="key" class="mx-2 mt-1">
-                  <nuxt-link
-                    :to="i.route"
-                    exact
-                    exact-active-class="active-category text-primary"
-                    class="rounded"
+              <b-icon icon="list"></b-icon><span>Categories</span>
+            </b-button>
+          </nuxt-link>
+          <div
+            class="all-categories position-absolute p-0"
+            ref="allCategories"
+            style="display:none;"
+          >
+            <div class="position-relative w-100 h-100">
+              <div
+                class="all-categories_backdrop position-absolute"
+                @mouseenter="disappearMenu('allCategories')"
+              ></div>
+              <div
+                class="all-categories_background bg-white rounded-bottom position-absolute ml-2"
+                @mouseleave="disappearMenu('allCategories')"
+              >
+                <ul class="btn-toggle-nav list-unstyled small d-flex">
+                  <li
+                    v-for="(i, key) in allCategories"
+                    :key="key"
+                    class="mx-2 mt-1"
                   >
-                    <span class="font-14">{{ key }}</span>
-                  </nuxt-link>
-                </li>
-              </ul>
+                    <nuxt-link
+                      :to="i.route"
+                      exact
+                      exact-active-class="active-category text-primary"
+                      class="rounded"
+                    >
+                      <span class="font-14">{{ key }}</span>
+                    </nuxt-link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <span class="text-light px-1 pb-1">|</span>
-      <navbarItem title="Discounts" route="/Products/category/Discounts" icon="percent" />
-      <navbarItem title="Games" route="/Products/category/forGamer" icon="controller" fontScale="1" />
-      <navbarItem title="About Us" route="/" icon="info-circle" />
-    </b-navbar>
-    <!-- <b-sidebar
+        <span class="text-light px-1 pb-1">|</span>
+        <navbarItem
+          title="Discounts"
+          route="/Products/category/Discounts"
+          icon="percent"
+        />
+        <navbarItem
+          title="Games"
+          route="/Products/category/forGamer"
+          icon="controller"
+          fontScale="1"
+        />
+        <navbarItem title="About Us" route="/" icon="info-circle" />
+      </b-navbar>
+    </div>
+    <b-sidebar
       id="sidebar-1"
       backdrop-variant="dark"
       backdrop
@@ -296,8 +325,7 @@
     >
       <template #default="{ hide }">
         <div
-          class="d-flex flex-column flex-shrink-0 p-3 bg-light"
-          style="width: 280px;"
+          class="w-100 d-flex flex-column flex-shrink-0 p-2 bg-light"
         >
           <div
             id="sidebar-no-header-title"
@@ -305,11 +333,13 @@
           >
             <nuxt-link
               to="/"
-              class="d-flex align-items-center mb-3 mb-md-0 mr-md-auto link-dark"
+              class="d-flex align-items-center font-weight-bold font-20"
             >
-              <NuxtLogo />
-              &nbsp;
-              <span>E-Shop</span>
+              <div class="d-flex align-items-baseline align-self-center">
+                <NuxtLogo />
+                &nbsp;
+                <span> E-<span class="text-primary">Shop</span></span>
+              </div>
             </nuxt-link>
             <b-icon
               icon="x"
@@ -334,15 +364,29 @@
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link
-                to="/Products"
-                exact
-                exact-active-class="active"
-                class="nav-link link-dark"
-              >
-                <b-icon icon="box-seam"></b-icon>
-                <span>All Products</span>
-              </nuxt-link>
+                <ul class="list-unstyled pl-0">
+                    <collapseItem name="Products" :visible=true id="collapse-4" :items="allCategories" :link="true" linkRoute="/Products" />
+                </ul>
+            </li>
+            <li>
+                <navbarItem
+                    title="Discounts"
+                    route="/Products/category/Discounts"
+                    icon="percent"
+                    fontScale="1"
+                    :activeClass="true"
+                    class="navbar-item-secondary"
+                />
+            </li>
+            <li>
+                <navbarItem
+                    title="Games"
+                    route="/Products/category/forGamer"
+                    icon="controller"
+                    fontScale="1.5"
+                    :activeClass="true"
+                    class="navbar-item-secondary"
+                />
             </li>
             <li>
               <nuxt-link
@@ -356,23 +400,27 @@
           </ul>
         </div>
       </template>
-    </b-sidebar> -->
+    </b-sidebar>
   </header>
 </template>
 <script>
 import navbarItem from "@/components/shared/appHeader/navbarItem.vue";
+import collapseItem from '@/components/aside/collapseItem.vue';
 import { mapGetters } from "vuex";
 export default {
   data() {
-    return {
-    };
+    return {};
   },
-  components:{
-      navbarItem
+  components: {
+    navbarItem,
+    collapseItem
   },
   mounted() {
     var cartJSON = localStorage.getItem("shoppingCart");
     this.$store.commit("Cart/updateAfterRefresh", cartJSON);
+    if(cartJSON){
+        this.$store.commit("Cart/changeSumTotal");
+    }
   },
   watch: {
     "$route.query"() {
@@ -439,6 +487,7 @@ export default {
     ...mapGetters("Cart", ["getItems"]),
     ...mapGetters("Cart", ["getTotal"]),
     ...mapGetters(["searchValue"]),
+    ...mapGetters(["getWidth"]),
     count() {
       return this.$store.state.Cart.count;
     },
@@ -464,6 +513,21 @@ export default {
 .header {
   z-index: 4;
   box-shadow: 0 7px 8px 0 rgb(0 0 0 / 4%);
+  &-search{
+      @media (min-width:576px) {
+          width: 50% !important;
+      }
+  }
+  &-brand{
+      @media (min-width:576px) {
+          width: auto !important;
+      }
+  }
+  &-other{
+      @media (min-width:576px) {
+          width: auto !important;
+      }
+  }
 }
 
 .shop-cart {
@@ -504,6 +568,7 @@ export default {
 }
 .close {
   font-size: 1.5rem;
+  float: none;
 }
 .ui-w-40 {
   width: 80px !important;
@@ -527,7 +592,7 @@ export default {
   right: 0;
   bottom: 0;
 }
-.navbar-expand-md .navbar-nav .nav-link {
+.navbar-expand-sm .navbar-nav .nav-link {
   padding-left: 4px;
   padding-right: 4px;
 }
@@ -546,4 +611,11 @@ export default {
     z-index: 3;
   }
 }
+.navbar{
+    @media (max-width:576px) {
+        padding-right: 8px !important;
+        padding-left: 8px !important;
+    }
+}
+
 </style>

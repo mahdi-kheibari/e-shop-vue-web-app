@@ -1,23 +1,10 @@
 <template>
-    <div class="container-fluid">
-    <div class="row">
-      <div class="col-2">
-        <asideLayout>
-            <div slot="beforeDivider">
-                <item name="Beauty and health" :route="beautyCategories.route" />
-                <collapseItem name="Products" :visible=true id="collapse-2" :items="beautyCategories.products" />
-            </div>
-        </asideLayout>
-      </div>
-      <div class="col-10">
-        <nuxt-child />
-      </div>
-    </div>
-  </div>
+  <subCategoryPage :subCategoryItems="beautyCategories">
+    <nuxt-child></nuxt-child>
+  </subCategoryPage>
 </template>
 <script>
-import collapseItem from '@/components/aside/collapseItem.vue';
-import item from '@/components/aside/item.vue';
+import subCategoryPage from "@/components/category/subCategoryPage.vue";
 export default {
   computed: {
     beautyCategories() {
@@ -25,8 +12,7 @@ export default {
     },
   },
   components:{
-      collapseItem,
-      item
+    subCategoryPage
   }
 };
 </script>

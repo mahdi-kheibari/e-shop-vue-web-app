@@ -1,5 +1,6 @@
 
 export const state = () => ({
+    windowWidth:'',
     searchValue:'',
     allCategories:["Digital","Fashion","Beauty","House"],
     mainSliderImg: [
@@ -40,6 +41,9 @@ export const state = () => ({
 
 })
 export const getters = {
+    getWidth(state) {
+        return state.windowWidth;
+    },
     mainSlider(state) {
         return state.mainSliderImg;
     },
@@ -59,5 +63,8 @@ export const mutations = {
     },
     removeSearchValue(state){
         state.searchValue=""
+    },
+    changeWidth(state,newWidth){
+        state.windowWidth=newWidth
     },
 }

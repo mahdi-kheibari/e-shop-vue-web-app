@@ -1,127 +1,278 @@
 @import './variable';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-body{
+
+html,body{
+    height: 100%;
+}
+body {
     overflow-x: hidden !important;
     font-family: 'Roboto', sans-serif;
     background-color: $light;
+    height: 100%;
 }
-// .font-12{
-//     font-size: .75rem;//for 
-// }
-.font-14{
-    font-size: .875rem !important;//for sub paragraph
+
+$fonts: (12: .75rem,
+    14: .875rem,
+    16: 1rem,
+    18: 1.125rem,
+    20: 1.25rem,
+    24: 1.5rem,
+    32: 2rem);
+
+@each $pixel,
+$rem in $fonts {
+    .font-#{$pixel} {
+        font-size: $rem !important;
+    }
 }
-.font-16{
-    font-size: 1rem !important;//like h4, for paragraph
+
+@each $bp-name,
+$bp-pixels in $grid-breakpoints {
+
+    //looping through xs, sm, md, lg, xl and their pixel values
+    @each $pixel,
+    $rem in $fonts {
+        @media (min-width: $bp-pixels) {
+
+            //only works if the screen is wider than this
+            .font-#{$bp-name}-#{$pixel} {
+                //names like w-md-40
+                font-size: $rem !important;
+            }
+        }
+    }
 }
-.font-18{
-    font-size: 1.125rem !important;//like h3&for bold text on p,btn,sub title
-}
-.font-20{
-    font-size: 1.25rem !important;//primary btn,title
-}
-.font-24{
-    font-size: 1.5rem !important;//like h2
-}
-.font-32{
-    font-size: 32rem !important;//like h1
-}
-a{
+
+a {
     color: $secondary !important;
     text-decoration: none;
-    &:hover{
+
+    &:hover {
         text-decoration: none;
     }
 }
-.text-decoration-line-through{
+
+.text-decoration-line-through {
     text-decoration: line-through;
 }
-.btn-primary{
+
+.btn-primary {
     font-size: 16px !important;
-    &:hover{
+
+    &:hover {
         background-color: $primary-light !important;
-        color:$white !important;
+        color: $white !important;
         border-color: $primary !important;
     }
 }
+
+.nav-pills .nav-link.active {
+    color: $white !important;
+}
+
 // for appHeader
 @mixin hoverCart {
-    color:$primary !important;
-    border:1px solid $primary !important;
+    color: $primary !important;
+    border: 1px solid $primary !important;
     border-radius: 4px !important;
 }
+
 @mixin activeNavItem {
-    color:$primary !important;
-        svg{
-            color:$primary !important;
-        }
+    color: $primary !important;
+
+    svg {
+        color: $primary !important;
+    }
+
     border-bottom: 1px solid $primary;
 }
-.form-control:focus{
+
+.navbar-light .navbar-toggler {
+    color: $secondary !important;
+}
+
+.navbar-toggler-icon {
+    color: $secondary !important;
+}
+
+.form-control:focus {
     box-shadow: none;
 }
-.cart-icon,.auth-icon,.discount-btn{
-    border:1px solid $white !important;
+
+.cart-icon,
+.auth-icon,
+.discount-btn {
+    border: 1px solid $white !important;
     padding: 0 8px !important;
     transition: all 0.5s linear;
-    &:hover{
-        @include hoverCart;
-    }
-}
-.shop-cart:hover{
-    .cart-icon{
+
+    &:hover {
         @include hoverCart;
     }
 }
 
-a.bg-white:hover, a.bg-white:focus, button.bg-white:hover, button.bg-white:focus{
+.shop-cart:hover {
+    .cart-icon {
+        @include hoverCart;
+    }
+}
+
+a.bg-white:hover,
+a.bg-white:focus,
+button.bg-white:hover,
+button.bg-white:focus {
     background-color: $white !important;
 }
-.second-navbar{
-    .btn{
+
+.second-navbar {
+    .btn {
         border: none;
         border-radius: 0 !important;
         border-bottom: 1px solid $white;
-        &:hover,&:active,&:focus{
+
+        &:hover,
+        &:active,
+        &:focus {
             background-color: $white !important;
             box-shadow: none;
         }
-        &:hover{
+
+        &:hover {
             @include activeNavItem;
         }
     }
 }
-.active-navbar-item{
-    .btn{
+
+.active-navbar-item {
+    .btn {
         @include activeNavItem;
     }
 }
+
 .btn-toggle:hover,
 .btn-toggle:focus {
     color: $primary !important;
 }
-.btn-toggle-nav a:hover{
+
+.btn-toggle-nav a:hover {
     color: $primary !important;
 }
 
+.navbar-item-secondary {
+    .btn-white {
+        background-color: $light !important;
+        border: none !important;
+        padding: .5rem 1rem !important;
+        margin-left: 0 !important;
+    }
+
+    .b-icon {
+        color: $secondary !important;
+        margin-left: 0 !important;
+    }
+}
+.checkout.btn-primary{
+    font-size: .75rem !important;
+    @media (min-width:576px) {
+        font-size: .875rem !important;
+    }
+    @media (min-width:768px) {
+        font-size: 1rem !important;
+    }
+}
 // for index page
 .swiper-pagination-bullet-active {
     background: $primary !important;
 }
+
+.see-all-end {
+    &:hover {
+
+        .text-secondary,
+        .text-info {
+            color: $primary !important;
+        }
+    }
+}
+
 //for category component
-.category{
-    a{
-        &:hover{
+.category {
+    a {
+        &:hover {
             background-color: $light !important;
             color: $primary !important;
         }
     }
 }
-//for breadcrumb
-.breadcrumb{
-    a{
-        &:hover{
+
+.category-sm {
+    z-index: 1;
+    border-top: solid 1px #ccc;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+
+    &-item {
+        &_cover {
+            svg {
+                fill: $secondary;
+            }
+        }
+
+        &:hover {
             color: $primary !important;
+
+            &_cover {
+                color: $primary !important;
+
+                svg {
+                    fill: $primary !important;
+                }
+            }
+
+            svg {
+                fill: $primary !important;
+            }
+        }
+    }
+
+    &-item.active {
+        color: $primary-light !important;
+        &_cover {
+            color: $primary-light !important;
+
+            svg {
+                fill: $primary-light !important;
+            }
+        }
+        svg {
+            fill: $primary-light !important;
+        }
+    }
+}
+
+//for breadcrumb
+.breadcrumb {
+    position: relative;
+    z-index: 0;
+
+    a {
+        &:hover {
+            color: $primary !important;
+        }
+    }
+}
+
+//for second swipers
+.swiper-container-2,
+.swiper-container-4 {
+    .swiper-slide {
+        border-radius: 8px;
+        margin-right: 6px !important;
+        transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), transform .2s cubic-bezier(.4, 0, 1, 1), -webkit-box-shadow .2s cubic-bezier(.4, 0, 1, 1), -webkit-transform .2s cubic-bezier(.4, 0, 1, 1);
+
+        &:hover {
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
+            transform: translateY(-2px);
         }
     }
 }

@@ -7,10 +7,12 @@ export default () => ({
                 route:"/Products/category/Digital",
                 products:{
                     mobile:{
+                        icon:"phone",
                         cover:"/images/category/Digital/mobile/cover.png",
                         route:"/Products/Digital/mobile",
                     },
                     laptop:{
+                        icon:"laptop",
                         cover:"/images/category/Digital/laptop/cover.png",
                         route:"/Products/Digital/laptop",
                     }
@@ -23,10 +25,12 @@ export default () => ({
                 route:"/Products/category/Fashion",
                 products:{
                     female:{
-                        cover:"/images/category/Fashion/female/cover.png",
+                        iconClass:'icon-female',
+                        cover:"/images/category/Fashion/female/cover.svg",
                         route:"/Products/Fashion/female",
                     },
                     male:{
+                        iconClass:'icon-tshirt',
                         cover:"/images/category/Fashion/male/cover.png",
                         route:"/Products/Fashion/male",
                     }
@@ -39,10 +43,12 @@ export default () => ({
                 route:"/Products/category/House",
                 products:{
                     cleaning:{
+                        iconClass:"icon-hand-sparkles",
                         cover:"/images/category/House/cleaning/cover.png",
                         route:"/Products/House/cleaning",
                     },
                     "video-audio":{
+                        icon:"tv",
                         cover:"/images/category/House/video_and_audio/cover.png",
                         route:"/Products/House/video-audio",
                     }
@@ -55,10 +61,12 @@ export default () => ({
                 route:"/Products/category/Beauty",
                 products:{
                     health:{
+                        iconClass:"icon-heartbeat",
                         cover:"/images/category/Beauty/Health/cover.png",
                         route:"/Products/Beauty/health",
                     },
                     makeup:{
+                        iconClass:"icon-paint-brush",
                         cover:"/images/category/Beauty/makeup/cover.png",
                         route:"/Products/Beauty/makeup",
                     }

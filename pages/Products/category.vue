@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-2">
+      <div class="col-lg-3 col-xl-2 d-none d-lg-block">
         <div class="h-100 d-block">
             <asideLayout>
                 <div slot="beforeDivider">
@@ -17,7 +17,7 @@
             </asideLayout>
         </div>
       </div>
-      <div class="col-10">
+      <div class="col-12 col-lg-9 col-xl-10">
         <nuxt-child />
       </div>
     </div>

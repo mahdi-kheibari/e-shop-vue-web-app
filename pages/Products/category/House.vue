@@ -1,18 +1,13 @@
 <template>
-    <div>
-        <section>
-            <category :products="productsCategory" subRoute="/Products/House/"/>
-        </section>
-        <section>
-            <breadcrumb activeText="House" />
-            <productList :items="Products" />
-        </section>
-    </div>
+    <categoryPage
+      :productsCategory="productsCategory"
+      :productsItems="Products"
+      subRoute="/Products/House/"
+      activeText="House"
+    />
 </template>
 <script>
-import category from '@/components/category.vue';
-import breadcrumb from "@/components/breadcrumb.vue";
-import productList from "@/components/productlist/productList.vue";
+import categoryPage from '@/components/category/categoryPage.vue';
 export default {
     computed: {
         productsCategory() {
@@ -20,16 +15,10 @@ export default {
         },
     },
     components:{
-        category,
-        breadcrumb,
-        productList
+        categoryPage,
     },
     asyncData({store}) {
-        const products=[];
         const houseProducts=store.state.House.Products;
-        // for ( let key in houseProducts) {
-        //     products.push(...houseProducts[key]);
-        // }
         return {
             Products:houseProducts
         }

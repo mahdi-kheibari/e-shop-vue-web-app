@@ -1,18 +1,15 @@
 <template>
-    <div>
-    <section>
-      <category :products="digitalCategory" subRoute="/Products/Digital/" :products2="houseCategory" subRoute2="/Products/House/" />
-    </section>
-    <section>
-      <breadcrumb activeText="Electronic needs" />
-      <productList :items="Products" />
-    </section>
-  </div>
+  <categoryPage
+      :productsCategory="digitalCategory"
+      :productsCategory2="houseCategory"
+      :productsItems="Products"
+      subRoute="/Products/Digital/"
+      subRoute2="/Products/House/"
+      activeText="Electronic needs"
+    />
 </template>
 <script>
-import category from "@/components/category.vue";
-import breadcrumb from "@/components/breadcrumb.vue";
-import productList from "@/components/productlist/productList.vue";
+import categoryPage from "@/components/category/categoryPage.vue";
 export default {
   computed: {
     digitalCategory() {
@@ -23,9 +20,7 @@ export default {
     },
   },
   components: {
-    category,
-    breadcrumb,
-    productList
+    categoryPage,
   },
   asyncData({store}) {
       const products={};

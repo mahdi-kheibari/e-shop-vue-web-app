@@ -34,13 +34,13 @@ export default {
   &_item {
     flex: 1 0 25%;
     max-width: 25%;
-    height: 370px;
+    height: 370px;  
     & > div {
       border: 1px solid #ebebeb;
       border-top: none;
       border-left: none;
       &:hover {
-        box-shadow: 0 2px 17px 0 rgb(0 0 0 / 10%);
+          box-shadow: 0 2px 17px 0 rgb(0 0 0 / 10%);
       }
     }
     &_img {
@@ -69,9 +69,30 @@ export default {
             font-size: .857rem;
         }
     }
+    @media (max-width:767px) {
+        flex: 1 0 100%;
+        max-width: 100%;
+        height: 175px !important;
+         & > div {
+             border-right: none;
+         }
+         &_img {
+             height:128px !important;
+             padding:0 10px;
+         }
+         &_caption{
+            height: 100%;
+        }
+         &_special{
+             width: 100%;
+         }
+    }
   }
 }
 .no-special{
     padding-top: 29px !important;
+    @media (max-width:767px) {
+        padding:0 15px !important;
+    }
 }
 </style>

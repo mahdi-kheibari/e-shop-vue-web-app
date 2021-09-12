@@ -9,7 +9,7 @@ $light:#edf2f7;
 $dark:#2c3e50;
 $black:#000;
 $white:#fff;
-$gray:#a1a3a8;
+$gray:#ccc;
 $body-color:$secondary;
 
 $theme-colors: (
@@ -34,7 +34,8 @@ $font-weight-bold:            500;
 $font-weight-bolder:          700;
 
 $grid-breakpoints: (
-  xs: 0,
+  xss: 0,
+  xs: 360px,
   sm: 576px,
   md: 768px,
   lg: 992px,

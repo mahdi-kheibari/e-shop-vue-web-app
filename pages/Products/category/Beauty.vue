@@ -1,38 +1,27 @@
 <template>
-    <div>
-        <section>
-            <category :products="productsCategory" subRoute="/Products/Beauty/"/>
-        </section>
-        <section>
-            <breadcrumb activeText="Beauty and health" />
-            <productList :items="Products" />
-        </section>
-    </div>
+    <categoryPage
+      :productsCategory="productsCategory"
+      :productsItems="Products"
+      subRoute="/Products/Beauty/"
+      activeText="Beauty and health"
+    />
 </template>
 <script>
-import category from '@/components/category.vue';
-import breadcrumb from "@/components/breadcrumb.vue";
-import productList from "@/components/productlist/productList.vue";
+import categoryPage from "@/components/category/categoryPage.vue";
 export default {
-    computed: {
-        productsCategory() {
-            return this.$store.state.categories.allCategories['Beauty and health'].products;
-        },
+  computed: {
+    productsCategory() {
+      return this.$store.state.categories.allCategories["Beauty and health"].products;
     },
-    components:{
-        category,
-        breadcrumb,
-        productList
-    },
-    asyncData({store}) {
-        const products=[];
-        const beautyProducts=store.state.Beauty.Products;
-        // for ( let key in beautyProducts) {
-        //     products.push(...beautyProducts[key]);
-        // }
-        return {
-            Products:beautyProducts
-        }
-    },
-}
+  },
+  components: {
+    categoryPage,
+  },
+  asyncData({ store }) {
+    const beautyProducts = store.state.Beauty.Products;
+    return {
+      Products: beautyProducts,
+    };
+  },
+};
 </script>

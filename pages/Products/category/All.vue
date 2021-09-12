@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-import productList from "@/components/productlist/productList.vue";
+import productList from "@/components/productList/productList.vue";
 export default {
   data() {
     return {

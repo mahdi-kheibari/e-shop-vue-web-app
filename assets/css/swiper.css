@@ -1,12 +1,13 @@
 /* for swiper */
 
-.swiper-container-2 {
+.swiper-container-2,.swiper-container-4{
     padding: 6px 4px;
-    overflow: hidden;
-    position: absolute;
     margin-bottom: 11px;
 }
-
+.swiper-container-4,.swiper-container-3,.swiper-container-2{
+    position: absolute;
+    overflow: hidden;
+}
 .swiper-slide {
     text-align: center;
     font-size: 18px;
@@ -31,7 +32,7 @@
     height: 100%;
     object-fit: cover;
 }
-.swiper-container-2 .swiper-slide img{
+.swiper-container-2 .swiper-slide img,.swiper-container-3 .swiper-slide img,.swiper-container-4 .swiper-slide img{
     object-fit: contain;
 }
 .swiper-button-next,swiper-button-prev{

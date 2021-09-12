@@ -1,5 +1,5 @@
 <template>
-  <div class="swiper-container" :style="{ width: width, height: height }">
+  <div class="swiper-container" :style="{ width: width}">
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
       <!-- Slides -->
@@ -18,7 +18,7 @@
 import Swiper, { Autoplay, EffectFade, Pagination, Navigation } from "swiper";
 Swiper.use([Autoplay, EffectFade, Pagination, Navigation]);
 export default {
-  props: {"width":String,"height":String,"danger":Boolean,"pagination":Boolean},
+  props: {"width":String,"danger":Boolean,"pagination":Boolean},
   mounted() {
     new Swiper(".swiper-container", {
       loop: true,

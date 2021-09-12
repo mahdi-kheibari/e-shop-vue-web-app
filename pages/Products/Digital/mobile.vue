@@ -6,7 +6,7 @@
 </template>
 <script>
 import breadcrumb from "@/components/breadcrumb.vue";
-import productList from "@/components/productlist/productList.vue";
+import productList from "@/components/productList/productList.vue";
 export default {
     components:{
         breadcrumb,

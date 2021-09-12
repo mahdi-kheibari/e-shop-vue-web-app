@@ -1,10 +1,60 @@
 <template>
   <div class="row">
-    <section class="col-12 col-sm-10">
-      <breadcrumb activeText="Special discounts" />
+    <section class="col-12 col-xl-10">
+      <div class="w-100 d-flex justify-content-between align-items-center">
+        <breadcrumb activeText="Special discounts" />
+        <div class="d-xl-none mr-1 flex-shrink-0">
+          <button v-b-toggle.sidebar-3 class="btn btn-gray text-white px-2 mb-1 mb-md-0">
+            <div class="d-flex align-items-center font-12 font-sm-14">
+                <b-icon icon="list" class="px-1" font-scale="2"></b-icon>
+                <span>advanced search</span>
+            </div>
+          </button>
+          <b-sidebar
+            id="sidebar-3"
+            backdrop-variant="dark"
+            backdrop
+            aria-labelledby="sidebar-no-header-title"
+            no-header
+            shadow
+          >
+            <template #default="{ hide }">
+              <div class="w-100 d-flex flex-column flex-shrink-0 p-2 bg-light">
+                <div
+                  id="sidebar-no-header-title"
+                  class="d-flex justify-content-between align-items-center"
+                >
+                  <div class="font-weight-bold font-20">
+                    Result Categories
+                  </div>
+                  <b-icon
+                    icon="x"
+                    @click="hide"
+                    variant="secondary"
+                    font-scale="3.5"
+                    class="btn"
+                  ></b-icon>
+                </div>
+                <hr />
+                <ul class="nav nav-pills flex-column mb-auto">
+                  <li class="nav-item pl-3" v-for="i in allCategories" :key="i">
+                      <input
+                        type="checkbox"
+                        :value="i"
+                        v-model="checkedCategory"
+                        @change="filtredCategory();hide();"
+                      />
+                      <label class="form-label">{{ i }}</label>
+                  </li>
+                </ul>
+              </div>
+            </template>
+          </b-sidebar>
+        </div>
+      </div>
       <productList :items="changeProducts ? discountProducts:Products" />
     </section>
-    <section class="col-sm-2">
+    <section class="col-xl-2 d-none d-xl-block">
       <asideLayout>
         <div slot="beforeDivider">
           <div v-for="i in allCategories" :key="i">
@@ -24,7 +74,7 @@
 </template>
 <script>
 import breadcrumb from "@/components/breadcrumb.vue";
-import productList from "@/components/productlist/productList.vue";
+import productList from "@/components/productList/productList.vue";
 export default {
   data() {
     return {

@@ -26,8 +26,9 @@ export default {
       '@/assets/scss/theme.scss',
       '@/assets/scss/custom.scss',
       '@/assets/css/swiper.css',
-      '@/node_modules/swiper/swiper-bundle.css',
+      '@/node_modules/swiper/swiper-bundle.min.css',
       '@/assets/css/aside.css',
+      '@/assets/css/otherIcons.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

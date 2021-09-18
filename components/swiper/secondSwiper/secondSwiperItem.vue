@@ -20,12 +20,13 @@
           'mx-2',
           'mb-0',
           'font-14',
+          {'text-right':$i18n.locale==='fa'}
         ]"
       >
-        {{ i.name }}
+        {{$i18n.locale==="en"?i.name:i.nameFa }}
       </p>
-      <div v-if="i.special" class="mt-3">
-        <span class="font-14 badge text-white rounded-pill bg-danger">
+      <div v-if="i.special" class="mt-3 d-flex" :class="[{'justify-content-end':$i18n.locale==='fa'},{'flex-row-reverse':$i18n.locale==='fa'}]">
+        <span class="font-14 badge text-white rounded-pill bg-danger" :class="[{'mr-1':$i18n.locale==='fa'}]">
           {{ i.discount }}
         </span>
         <span
@@ -34,7 +35,7 @@
         >
       </div>
       <div class="font-16 font-weight-bold">
-        {{ i.price }} <span class="font-14 font-weight-normal">toman</span>
+        {{ i.price }} <span class="font-14 font-weight-normal">{{$t('currency')}}</span>
       </div>
     </div>
   </div>

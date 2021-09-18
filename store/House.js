@@ -3,6 +3,7 @@ export const state = () => ({
         cleaning:[
             {
                 name:"Samsung P1494 Washing Machine - 9 Kg",
+                nameFa:"ماشین لباسشویی سامسونگ مدل P1494 ظرفیت 9 کیلوگرم",
                 id:"P1494",
                 images:[
                     {
@@ -17,6 +18,7 @@ export const state = () => ({
             },
             {
                 name:"Xiaomi cordless vacuum cleaner model 1C",
+                nameFa:"جارو شارژی شیائومی مدل 1C",
                 id:"1C",
                 images:[
                     {
@@ -31,6 +33,7 @@ export const state = () => ({
             },
             {
                 name:"GPlus GDW-J552S Dishwasher",
+                nameFa:"ماشین ظرفشویی جی پلاس مدل GDW-J552S",
                 id:"GDW-J552S",
                 images:[
                     {
@@ -47,6 +50,7 @@ export const state = () => ({
         "video-audio":[
             {
                 name:"Gplus GTV-50LU722S Smart LED TV 50 Inch",
+                nameFa:"تلویزیون ال ای دی هوشمند جی پلاس مدل GTV-50LU722S سایز 50 اینچ",
                 id:"GTV-50LU722S",
                 images:[
                     {
@@ -61,6 +65,7 @@ export const state = () => ({
             },
             {
                 name:"Sony Playstation 5 game console with a capacity of 825 GB",
+                nameFa:"کنسول بازی سونی مدل Playstation 5 ظرفیت 825 گیگابایت",
                 id:"Playstation_5",
                 images:[
                     {
@@ -75,6 +80,7 @@ export const state = () => ({
             },
             {
                 name:"Sony PlayStation 5 PLUS 3D gaming headset",
+                nameFa:"هدست گیمینگ سونی پلی استیشن 5 مدل PLUS 3D",
                 id:"PLUS_3D",
                 images:[
                     {

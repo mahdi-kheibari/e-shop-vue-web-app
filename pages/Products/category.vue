@@ -5,14 +5,14 @@
         <div class="h-100 d-block">
             <asideLayout>
                 <div slot="beforeDivider">
-                    <item name="All products" route="/Products/category/All" />
-                    <collapseItem name="Products" :visible=true id="collapse-1" :items="allCategories" />
+                    <item :name="$t('categoryAside.allProducts')" route="/Products/category/All" />
+                    <collapseItem :name="$tc('header.categoriesSm',2)" :visible=true id="collapse-1" :items="allCategories" />
                 </div>
                 <div slot="afterDivider">
-                    <item name="Special discount" route="/Products/category/Discounts" />
-                    <item name="Electronic needs" route="/Products/category/Electronic" />
-                    <item name="For gamers" route="/Products/category/forGamer" />
-                    <item name="Special brands" route="/Products/category/Brands" />
+                    <item :name="$t('indexPage.discounts')" route="/Products/category/Discounts" />
+                    <item :name="$tc('categoryAside.footer',1)" route="/Products/category/Electronic" />
+                    <item :name="$tc('categoryAside.footer',2)" route="/Products/category/forGamer" />
+                    <item :name="$t('indexPage.brands')" route="/Products/category/Brands" />
                 </div>
             </asideLayout>
         </div>

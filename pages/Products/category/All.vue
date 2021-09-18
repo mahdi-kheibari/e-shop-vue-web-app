@@ -2,7 +2,7 @@
     <div>
         <productList :items="searched ? filteredBySearch:products" />
         <div v-if="searched && Object.keys(filteredBySearch).length === 0" class="alert alert-warning">
-          Nothing found
+          {{$t('nothingFound')}}
         </div>
     </div>
 </template>
@@ -40,8 +40,11 @@ export default {
         searched=true
         for (let key in products) {
             const filtered=products[key].filter(item=>item.name.toLowerCase().includes(query.search.toLowerCase()));
+            const filteredFa=products[key].filter(item=>item.nameFa.toLowerCase().includes(query.search.toLowerCase()));
             if(filtered.length>0){
                 filteredBySearch[key]=filtered
+            }else if(filteredFa.length>0){
+                filteredBySearch[key]=filteredFa
             }
         }
         store.commit('changeSearchValue',query.search);

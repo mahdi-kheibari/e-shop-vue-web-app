@@ -1,6 +1,6 @@
 <template>
     <div>
-        <breadcrumb activeText="mobile" :subCrumb="true" subCrumbName="Digital" />
+        <breadcrumb :activeText="$i18n.locale==='en'?'mobile':'گوشی موبایل'" :subCrumb="true" :subCrumbName="$t('header.subCategories[0]')" subCrumbPath="Digital" />
         <productList :items="Products" subItemPath="mobile" />
     </div>
 </template>

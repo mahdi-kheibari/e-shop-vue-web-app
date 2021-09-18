@@ -4,6 +4,7 @@
     :similarProducts="similarProducts"
     :params="$route.params.id"
     subCrumbName="video-audio"
+    forBreadcrumbFa="صوتی و تصویری"
     subPath="House"
    />
 </template>

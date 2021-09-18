@@ -1,6 +1,6 @@
 <template>
     <div>
-         <breadcrumb activeText="video-audio" :subCrumb="true" subCrumbName="House" />
+         <breadcrumb :activeText="$i18n.locale==='en'?'video-audio':'صوتی تصویری'" :subCrumb="true" :subCrumbName="$t('header.subCategories[3]')" subCrumbPath="House" />
          <productList :items="Products" subItemPath="video-audio" />
     </div>
 </template>

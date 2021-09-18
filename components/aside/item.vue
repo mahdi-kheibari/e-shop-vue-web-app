@@ -1,7 +1,7 @@
 <template>
   <li class="mb-1">
     <nuxt-link
-      :to="route"
+      :to="localePath(`${route}`)"
       class="btn btn-toggle align-items-center rounded"
       exact
       exact-active-class="active-category text-primary"

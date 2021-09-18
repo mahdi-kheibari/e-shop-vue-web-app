@@ -3,7 +3,6 @@ import 'dotenv/config'
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
-
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'e-shop',
@@ -24,7 +23,6 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
       '@/assets/scss/theme.scss',
-      '@/assets/scss/custom.scss',
       '@/assets/css/swiper.css',
       '@/node_modules/swiper/swiper-bundle.min.css',
       '@/assets/css/aside.css',
@@ -35,6 +33,7 @@ export default {
   plugins: [
       '@/plugins/bootstrap-vue.js',
       '@/plugins/vue-toastify.js',
+      '@/plugins/clickOutside.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -46,10 +45,9 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // axios is required by @nuxtjs/auth
     '@nuxtjs/axios',
-    // https://auth.nuxtjs.org
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    '@nuxtjs/i18n'
   ],
   auth: {
     redirect: {
@@ -64,7 +62,28 @@ export default {
       }
     }
   },
+  i18n:{
+    locales: [
+        {
+            name:'English',
+            code:'en',
+            file:'en.js',
+            dir:'ltr'
+        },
+        {
+            name:'Persian',
+            code:'fa',
+            file:'fa.js',
+            dir:'rtl'
+        }
+    ],
+    defaultLocale: 'en',
+    langDir: 'lang/',
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+      babel:{
+        plugins:[["@babel/plugin-proposal-private-property-in-object", { "loose": true }]]
+      }
   }
 }

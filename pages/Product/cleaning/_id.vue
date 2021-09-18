@@ -4,6 +4,7 @@
     :similarProducts="similarProducts"
     :params="$route.params.id"
     subCrumbName="cleaning"
+    forBreadcrumbFa="نظافت"
     subPath="House"
    />
 </template>

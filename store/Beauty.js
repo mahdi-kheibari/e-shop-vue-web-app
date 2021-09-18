@@ -3,6 +3,7 @@ export const state = () => ({
         health:[
             {
                 name:"DERMALIFT SEBOLIFT CLEANSING SYNDET FOAM 150 mil",
+                nameFa:"فوم شستشوی صورت پوستهای چرب و جوشدار درمالیفت مدل سبولیفت حجم 150 میلی لیتر",
                 id:"FOAM_150",
                 images:[
                     {
@@ -17,6 +18,7 @@ export const state = () => ({
             },
             {
                 name:"Eucerin Nobacter Soap 100g",
+                nameFa:"صابون ضد جوش اوسرین  مدل نوباکتر 100g",
                 id:"Soap_100g",
                 images:[
                     {
@@ -31,6 +33,7 @@ export const state = () => ({
             },
             {
                 name:"Pro Derma Acnevest Pain 100 gr",
+                nameFa:"پن پوست چرب پرودرما مدل Acnevest مقدار 100 گرم",
                 id:"Pain_100gr",
                 images:[
                     {
@@ -47,6 +50,7 @@ export const state = () => ({
         makeup:[
             {
                 name:"Essence I Love Extreme Volume Mascara",
+                nameFa:"ریمل حجم دهنده اسنس مدل I Love Extreme Volume",
                 id:"Essence",
                 images:[
                     {
@@ -61,6 +65,7 @@ export const state = () => ({
             },
             {
                 name:"Callista Cover Up Concealer C11",
+                nameFa:"کانسیلر کالیستا مدل Cover Up شماره C11",
                 id:"Callista",
                 images:[
                     {
@@ -75,6 +80,7 @@ export const state = () => ({
             },
             {
                 name:"Callista Extend Volume Mascara",
+                nameFa:"ریمل حجم دهنده کالیستا مدل Extend Volume",
                 id:"Callista_Extend",
                 images:[
                     {

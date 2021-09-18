@@ -3,7 +3,7 @@
       :productsCategory="productsCategory"
       :productsItems="Products"
       subRoute="/Products/Digital/"
-      activeText="Digital products"
+      :activeText="$t('header.subCategories[0]')"
     />
 </template>
 <script>

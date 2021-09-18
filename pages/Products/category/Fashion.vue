@@ -3,7 +3,7 @@
       :productsCategory="productsCategory"
       :productsItems="Products"
       subRoute="/Products/Fashion/"
-      activeText="Fashion and clothing"
+      :activeText="$i18n.locale==='en'?'Fashion and clothing':'مد و پوشاک'"
     />
 </template>
 <script>

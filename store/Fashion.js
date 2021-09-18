@@ -3,6 +3,7 @@ export const state = () => ({
         female:[
             {
                 name:"Adidas Alpha walking shoes for women, model 909001",
+                nameFa:"کفش مخصوص پیاده روی زنانه آدیداس مدل Alpha کد 909001",
                 id:"909001",
                 images:[
                     {
@@ -17,6 +18,7 @@ export const state = () => ({
             },
             {
                 name:"Mango Women's Pants Code 3",
+                nameFa:"شلوار زنانه مانگو کد 3",
                 id:"Code_3",
                 images:[
                     {
@@ -31,6 +33,7 @@ export const state = () => ({
             },
             {
                 name:"LC Waikiki 8SH567Z8-PINK Coat For Women",
+                nameFa:"کت زنانه ال سی وایکیکی مدل 8SH567Z8-PINK",
                 id:"8SH567Z8-PINK",
                 images:[
                     {
@@ -47,6 +50,7 @@ export const state = () => ({
         male:[
             {
                 name:"Men Formal Jacket - Mango",
+                nameFa:"کت تک رسمی مردانه - مانگو",
                 id:"Formal_Jacket",
                 images:[
                     {
@@ -61,6 +65,7 @@ export const state = () => ({
             },
             {
                 name:"Adidas EG0711 Running Shoes For Men",
+                nameFa:"کفش مخصوص دویدن مردانه آدیداس مدل EG0711",
                 id:"EG0711",
                 images:[
                     {
@@ -75,6 +80,7 @@ export const state = () => ({
             },
             {
                 name:"Adidas socks model GG1015 three-digit set",
+                nameFa:"جوراب آدیداس مدل GG1015 مجموعه سه عددی",
                 id:"GG1015",
                 images:[
                     {

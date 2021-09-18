@@ -1,6 +1,6 @@
 <template>
     <div>
-         <breadcrumb activeText="makeup" :subCrumb="true" subCrumbName="Beauty" />
+         <breadcrumb :activeText="$i18n.locale==='en'?'makeup':'آرایشی'" :subCrumb="true" :subCrumbName="$t('header.subCategories[2]')" subCrumbPath="Beauty" />
          <productList :items="Products" subItemPath="makeup" />
     </div>
 </template>

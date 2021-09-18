@@ -5,7 +5,7 @@
       :productsItems="Products"
       subRoute="/Products/Digital/"
       subRoute2="/Products/House/"
-      activeText="For gamers"
+      :activeText="$tc('categoryAside.footer',2)"
     />
 </template>
 <script>

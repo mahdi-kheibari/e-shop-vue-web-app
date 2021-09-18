@@ -6,19 +6,19 @@
       variant="white"
       class="py-2 py-sm-1 px-sm-1 d-flex flex-wrap justify-content-between align-items-center"
     >
-      <b-navbar-brand class="w-50 header-brand d-flex justify-content-start w-sm-auto m-0 ml-sm-2 p-0 order-1">
+      <b-navbar-brand class="w-50 header-brand d-flex justify-content-start w-sm-auto m-0 ml-sm-2 p-0 order-1" :class="[{'mr-sm-2':$i18n.locale==='fa'},{'ml-sm-0':$i18n.locale==='fa'}]">
         <div
           to="/"
           class="d-flex justify-content-center align-items-baseline"
         >
-          <div class="m-1 ml-0 mr-2 d-block d-sm-none ">
+          <div class="ml-0 mr-2 d-block d-sm-none" :class="[{'ml-2':$i18n.locale==='fa'}]" :style="{'margin-right':$i18n.locale==='fa'?'0 !important':'auto'}">
             <button v-b-toggle.sidebar-1 class="btn bg-white text-secondary px-2">
                     <div class="font-weight-bolder font-24">
                         <b-icon icon="list"></b-icon>
                     </div>
             </button>
           </div>
-          <nuxt-link to="/" class="d-flex align-items-baseline align-self-center font-weight-bold">
+          <nuxt-link :to="localePath('/')" class="d-flex align-items-baseline align-self-center font-weight-bold">
             <NuxtLogo />
             &nbsp;
             <span> E-<span class="text-primary">Shop</span></span>
@@ -28,8 +28,20 @@
       <b-navbar-nav class="w-50 header-other w-sm-auto flex-row justify-content-end justify-content-sm-start order-2 order-sm-3">
         <b-nav-item href="#">
           <b-button
+            v-if="$i18n.locale==='en'"
             @click="$auth.loggedIn ? $auth.logout() : $auth.loginWith('auth0')"
-            v-b-tooltip.hover.left="$auth.loggedIn ? 'Logout' : 'Login'"
+            v-b-tooltip.hover.left="$auth.loggedIn ? $tc('header.loginTooltip',2) : $tc('header.loginTooltip',1)"
+            class="auth-icon text-secondary bg-white p-0 d-flex align-items-end"
+          >
+            <b-icon
+              :icon="$auth.loggedIn ? 'person-check' : 'person'"
+              font-scale="2.25"
+            ></b-icon>
+          </b-button>
+          <b-button
+            v-else
+            @click="$auth.loggedIn ? $auth.logout() : $auth.loginWith('auth0')"
+            v-b-tooltip.hover.right="$auth.loggedIn ? $tc('header.loginTooltip',2) : $tc('header.loginTooltip',1)"
             class="auth-icon text-secondary bg-white p-0 d-flex align-items-end"
           >
             <b-icon
@@ -54,29 +66,33 @@
                 </span>
               </div>
             </b-button>
-            <div class="shop-cart-info bg-white p-3">
+            <div class="shop-cart-info bg-white p-3" :class="{'shop-cart-info-rtl':$i18n.locale==='fa'}">
               <div class="d-flex justify-content-between pb-1">
-                <span class="text-dark">0 Product</span>
-                <span v-b-modal.modal-center class="text-info">View cart</span>
+                <span class="text-dark">
+                    {{$i18n.locale==='en' ?
+                     $tc('header.cartInfo.allCount',getItems.length > 1 ? 2:1,{n:getItems.length > 0 ? getItems.length:0}):
+                     $t('header.cartInfo.allCount',{count:getItems.length > 0 ? getItems.length:0})}}
+                </span>
+                <span v-b-modal.modal-center class="text-info">{{$t('header.cartInfo.cartBtn')}}</span>
               </div>
               <hr class="text-secondary" />
               <ul class="list-unstyled">
                 <li v-for="item in getItems" :key="item.id">
                   <nuxt-link
-                    :to="'/Product/' + item.category + '/' + item.id"
+                    :to="localePath(`/Product/${item.category}/${item.id}`)"
                     class="d-flex justify-content-between align-items-start my-1 link-dark"
                   >
-                    <div class="shop-cart-info-img h-100 align-self-center">
+                    <div class="shop-cart-info-img align-self-center">
                       <img :src="item.images[0].address" :alt="item.name" />
                     </div>
                     <div class="shop-cart-info-title">
-                      <span class="mb-1">
-                        {{ item.name }}
+                      <span class="mb-1" :class="{'text-right':$i18n.locale==='fa'}">
+                        {{$i18n.locale==='en'? item.name:item.nameFa }}
                       </span>
                     </div>
                   </nuxt-link>
                   <div class="d-flex justify-content-between">
-                    <span class="text-secondary">count : {{ item.count }}</span>
+                    <span class="text-secondary">{{$t('header.cartInfo.selfCount',{count:item.count})}}</span>
                     <b-icon
                       icon="trash"
                       class="text-danger"
@@ -87,8 +103,8 @@
                 </li>
               </ul>
               <div class="d-flex justify-content-between my-2 text-dark">
-                <span>Total</span>
-                <span v-if="getItems.length > 0">{{ getTotal }} toman</span>
+                <span>{{$t('header.cartInfo.totalName')}}</span>
+                <span v-if="getItems.length > 0">{{$t('header.cartInfo.total',{total:getTotal})}}</span>
               </div>
             </div>
           </div>
@@ -96,45 +112,60 @@
       </b-navbar-nav>
      <div class="w-100 header-search px-1 order-3 order-sm-2">
         <b-input-group class="w-100 mx-sm-0 mt-1">
+            <b-input-group-prepend v-if="$i18n.locale==='fa'" class="mr-0">
+                <nuxt-link
+                    :to="localeLocation({
+                        name: 'Products-category-All',
+                        query: { search: searchValue },
+                    })"
+                >
+                    <b-button variant="primary"
+                    ><b-icon icon="search"></b-icon
+                    ></b-button>
+                </nuxt-link>
+            </b-input-group-prepend>
             <input
             type="text"
-            class="form-control bg-light text-secondary"
-            placeholder="Search"
+            class="form-control bg-light text-secondary rounded"
+            :placeholder="$t('header.placeholder')"
             :value="searchValue"
             @change="changeSearchValue"
             @keyup.enter="
-                $router.push({
-                name: 'Products-category-All',
-                query: { search: searchValue },
-                })
+                $router.push(localeLocation({
+                        name: 'Products-category-All',
+                        query: { search: searchValue },
+                    }))
             "
             />
-            <b-input-group-append>
-            <nuxt-link
-                :to="{
-                name: 'Products-category-All',
-                query: { search: searchValue },
-                }"
-            >
-                <b-button variant="primary"
-                ><b-icon icon="search"></b-icon
-                ></b-button>
-            </nuxt-link>
+            <b-input-group-append v-if="$i18n.locale==='en'">
+                <nuxt-link
+                    :to="localeLocation({
+                        name: 'Products-category-All',
+                        query: { search: searchValue },
+                    })"
+                >
+                    <b-button variant="primary"
+                    ><b-icon icon="search"></b-icon
+                    ></b-button>
+                </nuxt-link>
             </b-input-group-append>
         </b-input-group>
      </div>
     </b-navbar>
     <b-modal id="modal-center" size="xl" scrollable centered>
       <template slot="modal-header">
-        <h5 class="modal-title">Shop Cart</h5>
-        <button
-          class="close btn align-self-start"
-          @click="hideModal('modal-center')"
-        >
-          x
-        </button>
+        <div class="w-100 d-flex justify-content-between align-items-center " :class="[{'dir-rtl':$i18n.locale==='fa'}]">
+            <h5 class="modal-title">{{$t('header.cartModal.header')}}</h5>
+            <button
+            class="close btn align-self-start"
+            :class="[{'m-0':$i18n.locale==='fa'},{'p-0':$i18n.locale==='fa'},{'align-self-center':$i18n.locale==='fa'}]"
+            @click="hideModal('modal-center')"
+            >
+            x
+            </button>
+        </div>
       </template>
-      <div class="container" v-if="getItems.length > 0">
+      <div class="container" v-if="getItems.length > 0" :class="[{'dir-rtl':$i18n.locale==='fa'}]">
         <div class="container px-3 my-5 clearfix">
           <!-- Shopping cart table -->
           <div class="table-responsive">
@@ -143,16 +174,16 @@
                 <tr>
                   <!-- Set columns width -->
                   <th class="text-center py-3 px-4" style="min-width: 400px;">
-                    Product Name &amp; Details
+                    {{$t('header.cartModal.tableHeader[0]')}}
                   </th>
                   <th class="text-center py-3 px-4" style="width: 100px;">
-                    Price
+                    {{$t('header.cartModal.tableHeader[1]')}}
                   </th>
                   <th class="text-center py-3 px-4" style="width: 120px;">
-                    Quantity
+                    {{$t('header.cartModal.tableHeader[2]')}}
                   </th>
                   <th class="text-center py-3 px-4" style="width: 100px;">
-                    Total
+                    {{$t('header.cartModal.tableHeader[3]')}}
                   </th>
                   <th
                     class="text-center align-middle py-3 px-0"
@@ -172,7 +203,7 @@
                 <tr v-for="item in getItems" :key="item.id">
                   <td class="p-4">
                     <nuxt-link
-                      :to="'/Product/' + item.category + '/' + item.id"
+                      :to="localePath(`/Product/${item.category}/${item.id}`)"
                       class="d-flex align-items-center link-dark"
                     >
                       <img
@@ -180,7 +211,7 @@
                         class="d-block ui-w-40 ui-bordered mr-4"
                         alt=""
                       />
-                      <span class="mx-auto">{{ item.name }}</span>
+                      <span class="mx-auto">{{$i18n.locale==='en'?item.name:item.nameFa }}</span>
                     </nuxt-link>
                   </td>
                   <td class="text-right font-weight-semibold align-middle p-4">
@@ -214,40 +245,52 @@
         </div>
       </div>
       <div class="container min-height-350" v-else>
-        <div class="alert alert-warning">
-          Your cart is empty
+        <div class="alert alert-warning" :class="[{'text-right':$i18n.locale==='fa'}]">
+          {{$t('header.cartModal.emptyCart')}}
         </div>
       </div>
-      <template v-if="getItems.length > 0" slot="modal-footer">
-        <div class="w-100 d-flex justify-content-between align-items-center">
-          <div class="d-flex flex-shrink-0">
-            <label class="text-muted font-weight-bold m-0 font-16 font-sm-18 font-lg-20"
-              >Total price</label
-            >
-            <div class="font-16 font-sm-18  font-lg-20">
-              : <strong> {{ getTotal }} </strong> toman
+      <template slot="modal-footer">
+        <div class="w-100" :class="[{'dir-rtl':$i18n.locale==='fa'}]">
+            <div v-if="getItems.length > 0" class="w-100 d-flex justify-content-between align-items-center">
+            <div class="d-flex flex-shrink-0">
+                <label class="text-muted font-weight-bold m-0 font-16 font-sm-18 font-lg-20"
+                >{{$t('header.cartInfo.totalName')}}</label
+                >
+                <div class="font-16 font-sm-18  font-lg-20">
+                : <strong> {{ getTotal }} </strong> {{$t('currency')}}
+                </div>
             </div>
-          </div>
-          <div class="d-flex">
-            <button
-              type="button"
-              class="btn btn-secondary font-12 font-sm-14 font-md-16"
-              @click="hideModal('modal-center')"
-            >
-              {{getWidth>=768?'Back to shopping':'Back'}}
-            </button>
-            <button
-              type="button"
-              class="btn checkout btn-primary ml-1 ml-sm-2 font-12 font-sm-14 font-md-16"
-              @click="checkout()"
-            >
-              Checkout
-            </button>
-          </div>
+            <div class="d-flex">
+                <button
+                type="button"
+                class="btn btn-light font-12 font-sm-14 font-md-16"
+                @click="hideModal('modal-center')"
+                >
+                {{getWidth>=768?$tc('header.cartModal.footerBtn.back',1):$tc('header.cartModal.footerBtn.back',2)}}
+                </button>
+                <button
+                type="button"
+                class="btn checkout btn-primary mx-1 mx-sm-2 font-12 font-sm-14 font-md-16"
+                @click="checkout()"
+                >
+                {{$t('header.cartModal.footerBtn.checkout')}}
+                </button>
+            </div>
+            </div>
+            <div v-else class="w-100 d-flex justify-content-end">
+                <button
+                type="button"
+                class="btn btn-secondary font-12 font-sm-14 font-md-16"
+                @click="hideModal('modal-center')"
+                >
+                    {{$tc('header.cartModal.footerBtn.back',2)}}
+                </button>
+            </div>
         </div>
       </template>
     </b-modal>
     <div class="d-none d-sm-block">
+     <div class="w-100 bg-white d-flex justify-content-between align-items-center">
       <b-navbar
         type="secondary"
         variant="white"
@@ -258,12 +301,12 @@
           @mouseenter="showMenu('allCategories')"
           @mouseleave="disappearMenu('allCategories')"
         >
-          <nuxt-link to="/Products" class="position-relative">
+          <nuxt-link :to="localePath('/Products')" class="position-relative">
             <b-button
               class="btn-white text-secondary ml-2 px-3 pr-4"
               @mouseover="showMenu('allCategories')"
             >
-              <b-icon icon="list"></b-icon><span>Categories</span>
+              <b-icon icon="list"></b-icon><span>{{$t('header.categories[0]')}}</span>
             </b-button>
           </nuxt-link>
           <div
@@ -278,6 +321,7 @@
               ></div>
               <div
                 class="all-categories_background bg-white rounded-bottom position-absolute ml-2"
+                :class="[{'ml-0':$i18n.locale==='fa'},{'mr-2':$i18n.locale==='fa'}]"
                 @mouseleave="disappearMenu('allCategories')"
               >
                 <ul class="btn-toggle-nav list-unstyled small d-flex">
@@ -287,12 +331,12 @@
                     class="mx-2 mt-1"
                   >
                     <nuxt-link
-                      :to="i.route"
+                      :to="localePath(`${i.route}`)"
                       exact
                       exact-active-class="active-category text-primary"
                       class="rounded"
                     >
-                      <span class="font-14">{{ key }}</span>
+                      <span class="font-14">{{$i18n.locale==='en'? key:i.titleFa }}</span>
                     </nuxt-link>
                   </li>
                 </ul>
@@ -302,18 +346,20 @@
         </div>
         <span class="text-light px-1 pb-1">|</span>
         <navbarItem
-          title="Discounts"
+          :title="$t('header.categories[1]')"
           route="/Products/category/Discounts"
           icon="percent"
         />
         <navbarItem
-          title="Games"
+          :title="$t('header.categories[2]')"
           route="/Products/category/forGamer"
           icon="controller"
           fontScale="1"
         />
-        <navbarItem title="About Us" route="/" icon="info-circle" />
+        <navbarItem :title="$t('header.categories[3]')" route="/" icon="info-circle" />
       </b-navbar>
+      <langSwitcher />
+     </div>
     </div>
     <b-sidebar
       id="sidebar-1"
@@ -322,82 +368,90 @@
       aria-labelledby="sidebar-no-header-title"
       no-header
       shadow
+      :right="$i18n.locale==='fa'?true:false"
     >
       <template #default="{ hide }">
-        <div
-          class="w-100 d-flex flex-column flex-shrink-0 p-2 bg-light"
-        >
-          <div
-            id="sidebar-no-header-title"
-            class="d-flex justify-content-between"
-          >
-            <nuxt-link
-              to="/"
-              class="d-flex align-items-center font-weight-bold font-20"
+        <div class="h-100 d-flex flex-column">
+
+            <div
+            class="w-100 d-flex flex-column flex-shrink-0 flex-grow-1 p-2 bg-light"
+            :class="[{'dir-rtl':$i18n.locale==='fa'}]"
             >
-              <div class="d-flex align-items-baseline align-self-center">
-                <NuxtLogo />
-                &nbsp;
-                <span> E-<span class="text-primary">Shop</span></span>
-              </div>
-            </nuxt-link>
-            <b-icon
-              icon="x"
-              @click="hide"
-              variant="secondary"
-              font-scale="3.5"
-              class="btn"
-            ></b-icon>
+            <div
+                id="sidebar-no-header-title"
+                class="d-flex justify-content-between"
+            >
+                <nuxt-link
+                :to="localePath('/')"
+                class="d-flex align-items-center font-weight-bold font-20"
+                >
+                <div class="d-flex align-items-baseline align-self-center">
+                    <NuxtLogo />
+                    &nbsp;
+                    <span> E-<span class="text-primary">Shop</span></span>
+                </div>
+                </nuxt-link>
+                <b-icon
+                icon="x"
+                @click="hide"
+                variant="secondary"
+                font-scale="3.5"
+                class="btn"
+                ></b-icon>
+            </div>
+            <hr />
+            <ul class="nav nav-pills flex-column mb-auto align-items-start p-0">
+                <li class="nav-item">
+                <nuxt-link
+                    :to="localePath('/')"
+                    exact
+                    exact-active-class="active"
+                    class="nav-link link-dark"
+                    aria-current="page"
+                >
+                    <b-icon icon="house-door"></b-icon>
+                    <span>{{$tc('header.categoriesSm',1)}}</span>
+                </nuxt-link>
+                </li>
+                <li>
+                    <ul class="list-unstyled pl-0">
+                        <collapseItem :name="$tc('header.categoriesSm',2)" :visible=true id="collapse-4" :items="allCategories" :link="true" linkRoute="/Products" />
+                    </ul>
+                </li>
+                <li>
+                    <navbarItem
+                        :title="$t('header.categories[1]')"
+                        route="/Products/category/Discounts"
+                        icon="percent"
+                        fontScale="1"
+                        :activeClass="true"
+                        class="navbar-item-secondary"
+                    />
+                </li>
+                <li>
+                    <navbarItem
+                        :title="$t('header.categories[2]')"
+                        route="/Products/category/forGamer"
+                        icon="controller"
+                        fontScale="1.5"
+                        :activeClass="true"
+                        class="navbar-item-secondary"
+                    />
+                </li>
+                <li>
+                <nuxt-link
+                    :to="localePath('/')"
+                    class="nav-link link-dark"
+                >
+                    <b-icon icon="info-circle"></b-icon>
+                    <span>{{$t('header.categories[3]')}}</span>
+                </nuxt-link>
+                </li>
+            </ul>
+            </div>
+          <div class="py-2 w-100 flex-shrink-0" >
+              <langSwitcher class="lang-sm" />
           </div>
-          <hr />
-          <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-              <nuxt-link
-                to="/"
-                exact
-                exact-active-class="active"
-                class="nav-link link-dark"
-                aria-current="page"
-              >
-                <b-icon icon="house-door"></b-icon>
-                <span>Home</span>
-              </nuxt-link>
-            </li>
-            <li>
-                <ul class="list-unstyled pl-0">
-                    <collapseItem name="Products" :visible=true id="collapse-4" :items="allCategories" :link="true" linkRoute="/Products" />
-                </ul>
-            </li>
-            <li>
-                <navbarItem
-                    title="Discounts"
-                    route="/Products/category/Discounts"
-                    icon="percent"
-                    fontScale="1"
-                    :activeClass="true"
-                    class="navbar-item-secondary"
-                />
-            </li>
-            <li>
-                <navbarItem
-                    title="Games"
-                    route="/Products/category/forGamer"
-                    icon="controller"
-                    fontScale="1.5"
-                    :activeClass="true"
-                    class="navbar-item-secondary"
-                />
-            </li>
-            <li>
-              <nuxt-link
-                to="/"
-                class="nav-link link-dark"
-              >
-                <b-icon icon="info-circle"></b-icon>
-                <span>About Us</span>
-              </nuxt-link>
-            </li>
-          </ul>
         </div>
       </template>
     </b-sidebar>
@@ -406,18 +460,22 @@
 <script>
 import navbarItem from "@/components/shared/appHeader/navbarItem.vue";
 import collapseItem from '@/components/aside/collapseItem.vue';
+import langSwitcher from '@/components/langSwitcher.vue';
 import { mapGetters } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+    };
   },
   components: {
     navbarItem,
-    collapseItem
+    collapseItem,
+    langSwitcher
   },
   mounted() {
     var cartJSON = localStorage.getItem("shoppingCart");
-    this.$store.commit("Cart/updateAfterRefresh", cartJSON);
+    var specialLocale = localStorage.getItem("specialLocale");
+    this.$store.commit("Cart/updateAfterRefresh", {cartJSON,specialLocale});
     if(cartJSON){
         this.$store.commit("Cart/changeSumTotal");
     }
@@ -481,7 +539,7 @@ export default {
     },
     showMenu(element) {
       this.$refs[`${element}`].style.display = "block";
-    },
+    }
   },
   computed: {
     ...mapGetters("Cart", ["getItems"]),
@@ -545,8 +603,8 @@ export default {
       width: 85px;
       height: 85px;
       img {
-        max-width: 100%;
-        max-height: 100%;
+        min-width: 100%;
+        height: 100%;
         object-fit: contain;
         object-position: center;
       }
@@ -561,6 +619,10 @@ export default {
         -webkit-box-orient: vertical;
       }
     }
+  }
+  &-info-rtl{
+      right: auto !important;
+      left: 0 !important;
   }
   &:hover &-info {
     display: block;
@@ -617,5 +679,4 @@ export default {
         padding-left: 8px !important;
     }
 }
-
 </style>

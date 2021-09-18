@@ -1,12 +1,12 @@
 <template>
 <div>
-    <breadcrumb  v-if="getWidth<=768" :activeText="params" :subCrumbSingle="true" :subPath="subPath" :subCrumbName="subCrumbName" class="ml-3 bg-transparent pt-0 " />
+    <breadcrumb  v-if="getWidth<=768" :activeText="params" :subCrumbSingle="true" :subPath="subPath" :subCrumbName="$i18n.locale==='fa'?forBreadcrumbFa:subCrumbName" :subCrumbPath="subCrumbName" class="ml-3 bg-transparent pt-0 " />
     <div class="bg-white px-2 pb-2">
         <section>
             <div class="row .no-guttesrs-less-md pt-2 px-2">
                 <div class="col-12 col-md-5 flex-md-shrink-0">
                   <div v-if="getWidth<768" class="product-information_name mb-2" >
-                      <h2 class="font-18">{{ product.name }}</h2>
+                      <h2 :class="[{'text-right':$i18n.locale==='fa'}]" class="font-18">{{$i18n.locale==="en"?product.name:product.nameFa }}</h2>
                   </div>
                   <div class="view-product row m-auto">
                       <div class="col-2">
@@ -24,18 +24,15 @@
                   </div>
                 </div>
                 <div class="col-12 col-md-4 flex-md-shrink-1 my-related mt-md-0" :class="[{'container':getWidth<768}]">
-                <breadcrumb  v-if="getWidth>=768" :activeText="params" :subCrumbSingle="true" :subPath="subPath" :subCrumbName="subCrumbName" class="ml-3 single-breadcrumb pl-0" />
-                <div class="product-information">
+                <breadcrumb  v-if="getWidth>=768" :activeText="params" :subCrumbSingle="true" :subPath="subPath" :subCrumbName="$i18n.locale==='fa'?forBreadcrumbFa:subCrumbName" :subCrumbPath="subCrumbName" class="ml-3 single-breadcrumb pl-0" />
+                <div class="product-information" :class="[{'text-right':$i18n.locale==='fa'}]">
                     <div class="product-information_name" v-if="getWidth>=768">
-                    <h2 class="font-24">{{ product.name }}</h2>
+                    <h2 class="font-24">{{ $i18n.locale==="en"?product.name:product.nameFa }}</h2>
                     </div>
                     <div class="h-100 mt-2">
                         <div class="h-100">
-                            <p class="my-auto">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Quibusdam impedit neque magni officiis aspernatur? Omnis
-                                culpa vitae quaerat modi animi praesentium quia quisquam vel
-                                reiciendis nisi ipsam, distinctio rerum maiores.
+                            <p class="my-auto text-justify">
+                                {{$t('productItemPage.discription')}}
                             </p>
                         </div>
                     </div>
@@ -45,19 +42,21 @@
                   <div class="product-information container-md ">
                     <div class="product-information-cart bg-light p-3">
                         <div class="pb-2 d-flex justify-content-between font-18">
-                            <span>Seller</span>
-                            <span>Lorem...</span>
+                            <span>{{$t('productItemPage.cart.seller')}}</span>
+                            <span>{{$t('productItemPage.cart.lorem')}}</span>
                         </div>
                         <hr class="m-0">
                         <div class="py-2 d-flex justify-content-between">
-                            <label class="font-18 flex-shrink-0">Count :</label>
-                            <input type="number" min="1" class="product-information_input search_box rounded flex-shrink-3" v-model="count"/>
+                            <label class="font-18 flex-shrink-0">{{$t('header.cartModal.tableHeader[2]')}} :</label>
+                            <input type="number" min="1" class="product-information_input search_box rounded flex-shrink-3" 
+                            :class="[{'text-right':$i18n.locale==='fa'}]" 
+                            v-model="count"/>
                         </div>
                         <hr class="m-0">
                         <div class="py-2">
                             <div v-if="product.special">
-                                <div class="text-left">
-                                    <span class="font-16 font-md-18 badge text-white rounded-pill bg-danger m-0">
+                                <div class="text-left d-flex" :class="[{'justify-content-end':$i18n.locale==='fa'},{'flex-row-reverse':$i18n.locale==='fa'}]">
+                                    <span class="font-16 font-md-18 badge text-white rounded-pill bg-danger m-0" :class="[{'mr-1':$i18n.locale==='fa'}]">
                                         {{product.discount}}
                                     </span>
                                     <span
@@ -66,10 +65,10 @@
                                     >
                                 </div>
                             </div>
-                            <div class="text-left font-18 font-md-20 font-weight-bold"><span class="font-weight-normal">Price : </span>{{ product.price }} <span class="font-14 font-md-16 font-weight-normal">toman</span></div>
+                            <div class="text-left font-18 font-md-20 font-weight-bold" :class="[{'text-right':$i18n.locale==='fa'}]"><span class="font-weight-normal">{{$t('header.cartModal.tableHeader[1]')}} : </span>{{ product.price }} <span class="font-14 font-md-16 font-weight-normal">{{$t('currency')}}</span></div>
                         </div>
                         <button type="button" class="btn btn-block btn-primary font-weight-bold" @click="addToCart">
-                            Add to cart
+                            {{$t('productItemPage.cart.btn')}}
                         </button>
                     </div>
                   </div>
@@ -79,16 +78,17 @@
         <section class="similars container bg-white mt-section">
             <div class="similars-header d-flex justify-content-between align-items-baseline">
                 <h2 class="similars-title d-inline py-2 font-20">
-                    Similar Products
+                    {{$t('productItemPage.similar')}}
                 </h2>
             </div>
             <secondSwiper width="100%" height="330px" v-if="getWidth>=992">
                     <nuxt-link
                     v-for="i in similarProducts.filter(i=>i.id!==product.id)"
                     :key="i.name"
-                    :to="'/Product/'+subCrumbName+'/'+i.id"
+                    :to="localePath(`/Product/${subCrumbName}/${i.id}`)"
                     :class="[
                         { 'swiper-slide-small': getWidth < 992 },'swiper-slide',{ bestSeller: getWidth >= 992 }
+                        ,{'swiper-slide-rtl':$i18n.locale==='fa'}
                     ]"
                     >
                         <secondSwiperItem :i="i" />
@@ -98,9 +98,10 @@
                     <nuxt-link
                     v-for="i in similarProducts.filter(i=>i.id!==product.id)"
                     :key="i.name"
-                    :to="'/Product/'+subCrumbName+'/'+i.id"
+                    :to="localePath(`/Product/${subCrumbName}/${i.id}`)"
                     :class="[
                         { 'swiper-slide-small': getWidth < 992 },'swiper-slide',{ bestSeller: getWidth >= 992 }
+                        ,{'swiper-slide-rtl':$i18n.locale==='fa'}
                     ]"
                     >
                         <secondSwiperItem :i="i" />
@@ -109,7 +110,7 @@
         </section>
         <section class="d-md-none fixed-bottom bg-white p-3">
             <button type="button" class="btn btn-block btn-primary font-weight-bold" @click="addToCart">
-                Add to cart
+                {{$t('productItemPage.cart.btn')}}
             </button>
         </section>
     </div>
@@ -122,7 +123,7 @@ import secondSwiperSm from "./swiper/secondSwiper/secondSwiperSm.vue";
 import secondSwiperItem from "./swiper/secondSwiper/secondSwiperItem.vue";
 import { mapGetters } from "vuex";
 export default {
-    props:{product:Object,similarProducts:Array,params:String,subCrumbName:String,subPath:String},
+    props:{product:Object,similarProducts:Array,params:String,subCrumbName:String,forBreadcrumbFa:String,subPath:String},
     data() {
         return {
             currentImg:this.product.images[0].address,
@@ -276,6 +277,7 @@ export default {
     overflow-x: scroll !important;
     scrollbar-color: #ccc transparent;
     scrollbar-width: thin;
+    padding-bottom: 4px !important;
     &::-webkit-scrollbar{
        height: 6px;
     }

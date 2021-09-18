@@ -1,12 +1,41 @@
-@import './variable';
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-
+@font-face {
+    font-family: "Vazir";
+    src: url("./../fonts/vazir/Vazir-Light-UI.eot") format("embedded-opentype"),
+    url("./../fonts/vazir/Vazir-Light-UI.ttf") format("truetype"),
+    url("./../fonts/vazir/Vazir-Light-UI.woff") format("woff"),
+    url("./../fonts/vazir/Vazir-Light-UI.woff2") format("woff2");
+    font-weight: 300;
+}
+@font-face {
+    font-family: "Vazir";
+    src: url("./../fonts/vazir/Vazir-Regular-UI.eot") format("embedded-opentype"),
+    url("./../fonts/vazir/Vazir-Regular-UI.ttf") format("truetype"),
+    url("./../fonts/vazir/Vazir-Regular-UI.woff") format("woff"),
+    url("./../fonts/vazir/Vazir-Regular-UI.woff2") format("woff2");
+    font-weight: 400;
+}
+@font-face {
+    font-family: "Vazir";
+    src: url("./../fonts/vazir/Vazir-Medium-UI.eot") format("embedded-opentype"),
+    url("./../fonts/vazir/Vazir-Medium-UI.ttf") format("truetype"),
+    url("./../fonts/vazir/Vazir-Medium-UI.woff") format("woff"),
+    url("./../fonts/vazir/Vazir-Medium-UI.woff2") format("woff2");
+    font-weight: 500;
+}
+@font-face {
+    font-family: "Vazir";
+    src: url("./../fonts/vazir/Vazir-Bold-UI.eot") format("embedded-opentype"),
+    url("./../fonts/vazir/Vazir-Bold-UI.ttf") format("truetype"),
+    url("./../fonts/vazir/Vazir-Bold-UI.woff") format("woff"),
+    url("./../fonts/vazir/Vazir-Bold-UI.woff2") format("woff2");
+    font-weight: 700;
+}
 html,body{
     height: 100%;
 }
 body {
     overflow-x: hidden !important;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Vazir', sans-serif;
     background-color: $light;
     height: 100%;
 }
@@ -69,7 +98,9 @@ a {
 .nav-pills .nav-link.active {
     color: $white !important;
 }
-
+.dir-rtl{
+    direction: rtl !important;
+}
 // for appHeader
 @mixin hoverCart {
     color: $primary !important;
@@ -168,7 +199,6 @@ button.bg-white:focus {
 
     .b-icon {
         color: $secondary !important;
-        margin-left: 0 !important;
     }
 }
 .checkout.btn-primary{
@@ -178,6 +208,32 @@ button.bg-white:focus {
     }
     @media (min-width:768px) {
         font-size: 1rem !important;
+    }
+}
+.lang-switch{
+    border-radius: 1.5rem;
+    .other-locale{
+        top: 25px;
+        left: 0;
+        li{
+            a{
+                &:hover{
+                    color: $primary !important;
+                }
+            }
+        }
+        &_active{
+            background-color: rgb(240, 255, 244) !important;
+            a{
+                color: $primary !important;
+            }
+        }
+    }
+}
+.lang-switch.lang-sm{
+    .other-locale{
+        bottom: 10px !important;
+        top: auto !important;
     }
 }
 // for index page
@@ -275,4 +331,7 @@ button.bg-white:focus {
             transform: translateY(-2px);
         }
     }
+}
+.swiper-button-next , .swiper-button-prev{
+    z-index: 2 !important;
 }

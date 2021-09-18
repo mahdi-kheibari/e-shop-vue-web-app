@@ -1,11 +1,11 @@
 <template>
     <div>
-        <h1 class="text-center font-weight-bold mb-3">All categories</h1>
-        <section class="container">
+        <h1 class="text-center font-weight-bold mb-3">{{$t('categoryPage')}}</h1>
+        <section class="container" style="direction:ltr !important;">
             <div class="row">
                 <div v-for="(i,key) in allCategories" :key="key" class="col-12 col-md-6">
                     <div class="category my-2">
-                        <nuxt-link :to="i.route" :style="{'background-image':'url('+i.address+')'}"></nuxt-link>
+                        <nuxt-link :to="localePath(`${i.route}`)" :style="{'background-image':'url('+i.address+')'}"></nuxt-link>
                     </div>
                 </div>
             </div>

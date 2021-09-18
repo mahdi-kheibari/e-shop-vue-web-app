@@ -2,12 +2,12 @@
   <div class="row">
     <section class="col-12 col-xl-10">
       <div class="w-100 d-flex justify-content-between align-items-center">
-        <breadcrumb activeText="Special discounts" />
+        <breadcrumb :activeText="$t('indexPage.discounts')" />
         <div class="d-xl-none mr-1 flex-shrink-0">
-          <button v-b-toggle.sidebar-3 class="btn btn-gray text-white px-2 mb-1 mb-md-0">
+          <button v-b-toggle.sidebar-3 class="btn btn-white px-2 mb-1 mb-md-0">
             <div class="d-flex align-items-center font-12 font-sm-14">
                 <b-icon icon="list" class="px-1" font-scale="2"></b-icon>
-                <span>advanced search</span>
+                <span>{{$t('advancedSearch')}}</span>
             </div>
           </button>
           <b-sidebar
@@ -17,15 +17,16 @@
             aria-labelledby="sidebar-no-header-title"
             no-header
             shadow
+            :right="$i18n.locale==='fa'?true:false"
           >
             <template #default="{ hide }">
-              <div class="w-100 d-flex flex-column flex-shrink-0 p-2 bg-light">
+              <div class="w-100 d-flex flex-column flex-shrink-0 p-2 bg-light" :class="[{'dir-rtl':$i18n.locale==='fa'}]">
                 <div
                   id="sidebar-no-header-title"
                   class="d-flex justify-content-between align-items-center"
                 >
                   <div class="font-weight-bold font-20">
-                    Result Categories
+                    {{$t('categoryAside.header')}}
                   </div>
                   <b-icon
                     icon="x"
@@ -36,15 +37,15 @@
                   ></b-icon>
                 </div>
                 <hr />
-                <ul class="nav nav-pills flex-column mb-auto">
-                  <li class="nav-item pl-3" v-for="i in allCategories" :key="i">
+                <ul class="nav nav-pills flex-column mb-auto align-items-start p-0" :class="[{'pr-2':$i18n.locale==='fa'}]">
+                  <li class="nav-item pl-3" v-for="i,index in allCategories" :key="i">
                       <input
                         type="checkbox"
                         :value="i"
                         v-model="checkedCategory"
                         @change="filtredCategory();hide();"
                       />
-                      <label class="form-label">{{ i }}</label>
+                      <label class="form-label">{{$t(`header.subCategories[${index}]`)}}</label>
                   </li>
                 </ul>
               </div>
@@ -55,9 +56,9 @@
       <productList :items="changeProducts ? discountProducts:Products" />
     </section>
     <section class="col-xl-2 d-none d-xl-block">
-      <asideLayout>
+      <asideLayout :class="[{'text-right':$i18n.locale==='fa'}]">
         <div slot="beforeDivider">
-          <div v-for="i in allCategories" :key="i">
+          <div v-for="i,index in allCategories" :key="i">
             <input
               type="checkbox"
               :id="i"
@@ -65,7 +66,7 @@
               v-model="checkedCategory"
               @change="filtredCategory()"
             />
-            <label :for="i" class="form-label">{{ i }}</label>
+            <label :for="i" class="form-label">{{$t(`header.subCategories[${index}]`)}}</label>
           </div>
         </div>
       </asideLayout>

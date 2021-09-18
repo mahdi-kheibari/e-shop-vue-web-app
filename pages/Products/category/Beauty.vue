@@ -3,7 +3,7 @@
       :productsCategory="productsCategory"
       :productsItems="Products"
       subRoute="/Products/Beauty/"
-      activeText="Beauty and health"
+      :activeText="$i18n.locale==='en'?'Beauty and health':'زیبایی و سلامت'"
     />
 </template>
 <script>

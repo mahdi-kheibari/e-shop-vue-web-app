@@ -1,7 +1,7 @@
 <template>
-       <div class="products-list bg-white mb-3">
+      <div class="products-list bg-white mb-3">
         <div v-if="Array.isArray(items)===false" class="d-flex flex-wrap">
-            <ul class="d-flex w-100 flex-wrap mt-1 m-0 list-unstyled">
+            <ul class="d-flex w-100 flex-wrap mt-md-1 m-0 list-unstyled">
                 <template v-for="(item,key) in items">
                     <li v-for="i in item" :key="i.name" :class="['products-list_item']">
                         <productItem :item="i" :keyName="key" />
@@ -77,6 +77,7 @@ export default {
              border-right: none;
          }
          &_img {
+             width: 8rem;
              height:128px !important;
              padding:0 10px;
          }

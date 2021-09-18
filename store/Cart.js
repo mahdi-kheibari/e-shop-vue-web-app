@@ -61,8 +61,11 @@ export const mutations = {
             state.sumTotal=0
         }
     },
-    updateAfterRefresh(state,cartJSON){
-        state.cartItems = cartJSON ? JSON.parse(cartJSON) : [];
+    updateAfterRefresh(state,storage){
+        state.cartItems = storage.cartJSON ? JSON.parse(storage.cartJSON) : [];
+        if(storage.specialLocale){
+            this.$i18n.setLocale(storage.specialLocale);
+        }
     }
 };
 export const actions = {

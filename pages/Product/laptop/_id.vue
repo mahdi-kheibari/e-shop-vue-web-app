@@ -4,6 +4,7 @@
     :similarProducts="similarProducts"
     :params="$route.params.id"
     subCrumbName="laptop"
+    forBreadcrumbFa="لپ تاپ"
     subPath="Digital"
    />
 </template>

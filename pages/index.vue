@@ -9,7 +9,7 @@
               :pagination="true"
               class="categories"
             >
-              <nuxt-link v-for="i in mainSlider" :key="i.name" :to="'/Products/category/'+i.route" class="swiper-slide">
+              <nuxt-link v-for="i in mainSlider" :key="i.name" :to="localePath(`/Products/category/${i.route}`)" class="swiper-slide">
                 <img :src="i.address" :alt="i.name" />
               </nuxt-link>
             </mainSwiper>
@@ -17,7 +17,7 @@
         </div>
         <div class="col-4" v-if="getWidth>=992">
           <div class="bg-white discounts py-2 d-flex flex-column align-items-center">
-            <h2 class="text-danger text-center discounts-title">Special discounts</h2>
+            <h2 class="text-danger text-center discounts-title">{{$t('indexPage.discounts')}}</h2>
             <mainSwiper
               width="100%"
               :danger="true"
@@ -27,7 +27,7 @@
               <nuxt-link
                 v-for="i in discountSlider"
                 :key="i.name"
-                :to="'/Product/'+i.category+'/'+i.id"
+                :to="localePath(`/Product/${i.category}/${i.id}`)"
                 class="swiper-slide justify-content-start flex-column"
               >
                 <div class="second-card-img mx-auto">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="d-flex flex-column h-100 justify-content-between discounts-slider_caption align-items-center text-center">
                     <span :class="['caption_nameOneLine','mx-2','mb-0','font-16']">
-                    {{ i.name }}
+                    {{ $i18n.locale==="en"?i.name:i.nameFa }}
                     </span>
                     <div>
                         <span class="font-16 badge text-white rounded-pill bg-danger">
@@ -45,13 +45,13 @@
                             class="font-14 text-muted text-decoration-line-through text-secondary"
                             >{{ i.realPrice }}</span
                         >
-                        <div class="text-left font-18 font-weight-bold">{{ i.price }} <span class="font-14 font-weight-normal">toman</span></div>
+                        <div class="text-left font-18 font-weight-bold">{{ i.price }} <span class="font-14 font-weight-normal">{{$t('currency')}}</span></div>
                     </div>
                 </div>
               </nuxt-link>
             </mainSwiper>
-            <nuxt-link to="/Products/category/Discounts" class="text-primary mt-auto">
-              <span class="font-20 discount-btn">See all</span>
+            <nuxt-link :to="localePath('/Products/category/Discounts')" class="text-primary mt-auto">
+              <span class="font-20 discount-btn">{{$t('indexPage.seeAll')}}</span>
             </nuxt-link>
           </div>
         </div>
@@ -59,15 +59,15 @@
             <div class="discounts-small position-relative d-flex align-items-center">
                 <discountSwiper width="100%">
                     <div class="swiper-slide swiper-slide-small bg-transparent">
-                        <nuxt-link to="/Products/category/Discounts" class="d-flex flex-column h-100 justify-content-around text-white mt-auto">
-                            <h2 class="text-white text-center">Special discounts</h2>
-                            <span class="font-20 align-self-center w-50 btn btn-primary">See all</span>
+                        <nuxt-link :to="localePath('/Products/category/Discounts')" class="d-flex flex-column h-100 justify-content-around text-white mt-auto">
+                            <h2 class="text-white text-center">{{$t('indexPage.discounts')}}</h2>
+                            <span class="font-20 align-self-center btn btn-primary" :class="[{'w-50':$i18n.locale==='en'}]">{{$t('indexPage.seeAll')}}</span>
                         </nuxt-link>
                     </div>
                     <nuxt-link
                     v-for="i in discountSlider"
                     :key="i.name"
-                    :to="'/Product/'+i.category+'/'+i.id"
+                    :to="localePath(`/Product/${i.category}/${i.id}`)"
                     class="swiper-slide swiper-slide-small p-2 justify-content-start flex-column link-dark"
                     >
                     <div class="second-card-img-small mx-auto">
@@ -75,7 +75,7 @@
                     </div>
                     <div class="my-auto d-flex flex-column align-items-center text-center">
                         <span class="text-left mx-2 mb-0 font-14 caption_nameOneLine">
-                        {{ i.name }}
+                        {{$i18n.locale==="en"?i.name:i.nameFa }}
                         </span>
                         <div class="text-left mt-3">
                             <span class="font-14 badge text-white rounded-pill bg-danger">
@@ -86,15 +86,15 @@
                                 >{{ i.realPrice }}</span
                             >
                         </div>
-                        <div class="text-left font-16 font-weight-bold">{{ i.price }} <span class="font-12 font-weight-normal">toman</span></div>
+                        <div class="text-left font-16 font-weight-bold">{{ i.price }} <span class="font-12 font-weight-normal">{{$t('currency')}}</span></div>
                     </div>
                     </nuxt-link>
                     <div class="swiper-slide swiper-slide-small bg-white">
-                        <nuxt-link to="/Products/category/Discounts" class="see-all-end d-flex flex-column h-100 justify-content-center align-items-center text-white mt-auto">
+                        <nuxt-link :to="localePath('/Products/category/Discounts')" class="see-all-end d-flex flex-column h-100 justify-content-center align-items-center text-white mt-auto">
                             <div class="text-info">
-                              <b-icon icon="arrow-right-circle" font-scale="2" class="pb-1 text-info"></b-icon>
+                              <b-icon icon="arrow-right-circle" font-scale="2" class="pb-1 text-info" :class="[{'icon-rtl':$i18n.locale==='fa'}]"></b-icon>
                             </div>
-                            <span class="font-20 align-self-center text-secondary">See all</span>
+                            <span class="font-20 align-self-center text-secondary">{{$t('indexPage.seeAll')}}</span>
                         </nuxt-link>
                     </div>
                 </discountSwiper>
@@ -102,18 +102,21 @@
         </div>
       </section>
         <section class="bestSellers bg-white mt-section">
-            <div class="bestSellers-header d-flex justify-content-between align-items-baseline">
+            <div class="bestSellers-header d-flex justify-content-between align-items-baseline"
+            :class="[{'bestSellers-header-rtl':$i18n.locale==='fa'}]"
+            >
                 <h2 class="bestSellers-title d-inline py-2 font-20">
-                    Recent bestsellers
+                    {{$t('indexPage.bestsellers')}}
                 </h2>
             </div>
             <secondSwiper width="100%" height="330px" v-if="getWidth>=992">
                 <nuxt-link
                 v-for="i in bestSellerSlider"
                 :key="i.name"
-                :to="'/Product/' + i.category + '/' + i.id"
+                :to="localePath(`/Product/${i.category}/${i.id}`)"
                 :class="[
                     { 'swiper-slide-small': getWidth < 992 },'swiper-slide',{ bestSeller: getWidth >= 992 }
+                    ,{'swiper-slide-rtl':$i18n.locale==='fa'}
                 ]"
                 >
                     <secondSwiperItem :i="i" />
@@ -123,9 +126,10 @@
                 <nuxt-link
                 v-for="i in bestSellerSlider"
                 :key="i.name"
-                :to="'/Product/' + i.category + '/' + i.id"
+                :to="localePath(`/Product/${i.category}/${i.id}`)"
                 :class="[
                     { 'swiper-slide-small': getWidth < 992 },'swiper-slide',{ bestSeller: getWidth >= 992 }
+                    ,{'swiper-slide-rtl':$i18n.locale==='fa'}
                 ]"
                 >
                     <secondSwiperItem :i="i" />
@@ -135,13 +139,15 @@
         <section
             class="brands bg-white mt-section"
         >
-            <div class="d-flex justify-content-between brands-header align-items-baseline">
+            <div class="d-flex justify-content-between brands-header align-items-baseline"
+            :class="[{'bestSellers-header-rtl':$i18n.locale==='fa'}]"
+            >
                 <h2 class="brands-title d-inline py-2 font-20">
-                    Special brands
+                    {{$t('indexPage.brands')}}
                 </h2>
-                <nuxt-link to="/Products/category/Brands" class="mr-1">
+                <nuxt-link :to="localePath('/Products/category/Brands')" class="mr-1" :class="[{'ml-1':$i18n.locale==='fa'}]">
                     <button class="btn btn-primary text-white">
-                        See all
+                        {{$t('indexPage.seeAll')}}
                     </button>
                 </nuxt-link> 
             </div>
@@ -149,8 +155,9 @@
                 <nuxt-link
                     v-for="i in SpecialBrandsSlider"
                     :key="i.name"
-                    :to="'Products/category/Brands#'+i.name"
+                    :to="localeLocation({ path: `Products/category/Brands#${i.name}` })"
                     class="swiper-slide mt-1 px-2 mr-0 brand"
+                    :class="[{'swiper-slide-rtl':$i18n.locale==='fa'}]"
                 >
                     <div class="brand-img mx-auto">
                         <img :src="i.address" :alt="i.name" />
@@ -161,8 +168,9 @@
                 <nuxt-link
                     v-for="i in SpecialBrandsSlider"
                     :key="i.name"
-                    :to="'Products/category/Brands#'+i.name"
+                    :to="localeLocation({ path: `Products/category/Brands#${i.name}`})"
                     class="swiper-slide mt-1 px-2 mr-0 swiper-slide-small"
+                    :class="[{'swiper-slide-rtl':$i18n.locale==='fa'}]"
                 >
                     <div class="mx-auto second-card-img-small">
                         <img :src="i.address" :alt="i.name" />
@@ -372,6 +380,9 @@ export default {
     @media (max-width:768px) {
       margin-left: 20px !important;
     }
+  }
+  &-header-rtl{
+       margin:0px 33px 0 9px !important;
   }
 }
 .bestSellers,.similars {

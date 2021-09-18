@@ -3,7 +3,7 @@
       :productsCategory="productsCategory"
       :productsItems="Products"
       subRoute="/Products/House/"
-      activeText="House"
+      :activeText="$i18n.locale==='en'?'House':'خانه'"
     />
 </template>
 <script>

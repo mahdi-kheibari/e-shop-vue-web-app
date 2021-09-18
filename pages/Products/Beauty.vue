@@ -1,5 +1,5 @@
 <template>
-  <subCategoryPage :subCategoryItems="beautyCategories">
+  <subCategoryPage :topItemName="$t('header.subCategories[2]')" :subCategoryItems="beautyCategories">
     <nuxt-child></nuxt-child>
   </subCategoryPage>
 </template>

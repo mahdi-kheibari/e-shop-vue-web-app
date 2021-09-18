@@ -4,6 +4,7 @@
     :similarProducts="similarProducts"
     :params="$route.params.id"
     subCrumbName="makeup"
+    forBreadcrumbFa="آرایشی"
     subPath="Beauty"
    />
 </template>

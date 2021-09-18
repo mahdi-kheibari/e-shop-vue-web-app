@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <div :class="['layout',{'rtl':$i18n.locale==='fa'}]">
     <div class="content">
         <appHeader />
         <nuxt />
@@ -37,6 +37,29 @@ export default {
     }
     .footer{
         flex-shrink: 0;
+    }
+}
+.rtl{
+    direction: rtl !important;
+    .input-group-prepend{
+        margin-left: -3px !important;
+    }
+    .list-unstyled{
+        padding-right: 0 !important;
+    }
+    .alert{
+        text-align: right !important;
+    }
+    .btn-toggle-nav a{
+        margin-right: 1.25rem !important;
+        margin-left: 0 !important;
+    }
+    .swiper-slide-rtl{
+        margin-left:6px !important;
+        margin-right:0px !important;
+    }
+    .icon-rtl{
+        transform:rotate(180deg);
     }
 }
 </style>

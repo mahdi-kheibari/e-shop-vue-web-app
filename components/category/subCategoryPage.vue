@@ -4,8 +4,8 @@
             <div class="col-lg-3 col-xl-2 d-none d-lg-block">
                 <asideLayout>
                     <div slot="beforeDivider">
-                        <item name="Digital products" :route="subCategoryItems.route" />
-                        <collapseItem name="Products" :visible=true id="collapse-2" :items="subCategoryItems.products" />
+                        <item :name="topItemName" :route="subCategoryItems.route" />
+                        <collapseItem :name="$tc('header.categoriesSm',2)" :visible=true id="collapse-2" :items="subCategoryItems.products" />
                     </div>
                 </asideLayout>
             </div>
@@ -23,7 +23,7 @@ import collapseItem from '@/components/aside/collapseItem.vue';
 import categoryListSm from "@/components/category/categoryListSm.vue";
 import item from '@/components/aside/item.vue';
 export default {
-    props:['subCategoryItems',],
+    props:['subCategoryItems','topItemName'],
     components:{
         collapseItem,
         categoryListSm,

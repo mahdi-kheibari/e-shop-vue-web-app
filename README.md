@@ -1,7 +1,7 @@
 # e-shop
 
 > view generated of this project on this link (ability to register):
-https://e-shop-vue.netlify.app/
+https://mahdi-kheibari.github.io/e-shop-vue-web-app/
 
 ## Build Setup
 

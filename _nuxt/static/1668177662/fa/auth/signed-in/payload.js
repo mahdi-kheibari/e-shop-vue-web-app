@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/fa/auth/signed-in", {data:[{}],fetch:{},mutations:[]});
